@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -11,3 +12,4 @@ const InvoiceDetailSchema = Schema({
 });
 
 module.exports = mongoose.model('InvoiceDetail', InvoiceDetailSchema);
+*/

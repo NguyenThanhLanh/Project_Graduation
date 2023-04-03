@@ -9,7 +9,6 @@ const CartSchema = new Schema({
         {
             productId: { type: ObjectId, ref: 'Product'},
             quantity: { type: Number, require: true},
-            price: { type: Number, require: true}
         }
     ]
 });
