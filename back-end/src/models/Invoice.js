@@ -10,10 +10,9 @@ const InvoiceSchema = new Schema({
         {
             productId: { type: ObjectId, ref: 'Product', required: true },
             quantity: { type: Number, required: true },
-            priceTotal: { type: Number, required: true }
+            price: { type: Number, required: true }
         }
-    ],
-    totalPrice: { type: Number, require: true } //
+    ]
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);
