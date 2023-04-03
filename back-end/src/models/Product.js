@@ -8,10 +8,9 @@ const ProductSchema = new Schema({
   description: { type: String, require: true },
   price: { type: Number, require: true },
   image: { type: String, require: true },
-  productType_id: { type: ObjectId, ref: 'ProductType' },
-  comment_ids: { type: [ObjectId], ref: 'Comment'},
-  suppiler_id: { type: ObjectId, ref: 'Suppiler' },
   quantity: { type: Number, default: 0},
+  productTypeId: { type: ObjectId, ref: 'ProductType' },
+  suppilerId: { type: ObjectId, ref: 'Suppiler' },
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

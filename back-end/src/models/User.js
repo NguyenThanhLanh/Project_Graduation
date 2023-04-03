@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ObjectId = new Schema.ObjectId;
+const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
     name: { type: String, required: true , unique: true},
@@ -9,7 +9,8 @@ const UserSchema = new Schema({
     email: { type: String, required: true, unique: true},
     phone: { type: String, required: true, unique: true},
     password: {type: String, require: true},
-    role_id: {type: ObjectId, ref: 'Role', require: true}
-})
+    refreshToken: { type: String, default: null },
+    roleId: { type: ObjectId, ref: 'Role'}
+});
 
 module.exports = mongoose.model('User', UserSchema);

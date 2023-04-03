@@ -1,0 +1,48 @@
+Cart		User Product		{ "user": ObjectId("615"), "products": [ { "productId": ObjectId("615") , "quantity": 200, "price": 40000 } ] } 
+Comment		User Product		{ "userId": ObjectId("615"), "productId": ObjectId("615"), "comment": "dahjsfk" }
+Invoice		User Product		{ "userId": ObjectId("615"), "date": Date.now(), "products": [ { "productId": ObjectId("615"), "quantity": 400, "priceTotal": 40000 } ] }
+User		Role			{ "name": "ThanhLanh", "address": "BinhDinh", "email":"thanhlanh12a3@gmail.com", "phone":"0382056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("615") }
+InvoiceDetail	Invoice Product		{ "invoiceId": ObjectId("615"), "productId": ObjectId("615"), "quantity": 4000, "price": 200000 }
+Product		ProductType Suppiler	{ "name": "TenSPham", "description": "Mo ta san pham", "price": 20000, "image": "image.jpg", "quantity": 300, "productTypeId": ObjectId("615"), "suppilerId": ObjectId("615")  }
+ProductType x				{ "name": "TenLoaiSanPham" }
+Role	x				{ "name": "Admin" }
+Suppiler x				{ "name": "LanhNT", "address": "BinhDInh", "phone": "0382056287", "email": "thanhlanh12a3@gmail.com" }
+
+
+ProductType 
+Dong phuc	6429a05c0e4acfb890a80bfb
+Non		6429a05c0e4acfb890a80bfc
+Giay		6429a05c0e4acfb890a80bfd
+Kinh		6429a05c0e4acfb890a80bfe
+Gangtay		6429a05c0e4acfb890a80bff
+Ao		6429af6f0e4acfb890a80c11
+Quan		6429af6f0e4acfb890a80c12
+
+NhaCungCap
+ELISE						64299eb40e4acfb890a80bf3
+CÔNG TY TNHH THỜI TRANG VÀ MỸ PHẨM ÂU CHÂU	64299eb40e4acfb890a80bf4
+CÔNG TY TNHH THỜI TRANG H VÀ A			64299eb40e4acfb890a80bf5
+YODY						64299eb40e4acfb890a80bf6
+MAISON						64299eb40e4acfb890a80bf7
+SIXDO						64299eb40e4acfb890a80bf8
+
+Role
+Admin		642995c183b260b43e04b664
+User		642995c183b260b43e04b665
+
+insert doc product
+[
+{ "name": "Đồng phục công ty", "description": "Chất liệu may áo sơ mi vải : kate Mỹ, kate ý, kate silk, lụa, voan, cotton, thun cotton…Chất liệu may Váy, quần tây: tuypxi, tuyết mưa, tuyết nhung, kaki chun.", "price": 600000, "image": "image_1509451156_dong-phuc-cong-ty-mau-13-lon.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfb"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
+{ "name": "Quần áo bảo hộ tay ngắn phối màu", "description": "Đồng phục công nhân: chuyên dụng gồm  nhiều túi đựng dụng cụ giúp người mặc thuận tiện trong công việc. 2 túi xéo, 2 túi hậu và có thể có thêm 2 túi dọc 2 bên đáy vuông, có nắp đậy.", "price": 450000, "image": "thumb_1515659869_dong-phuc-cong-nhan-tay-ngan-thumnail-2.jpg", "quantity": 309, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfb"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf5")},
+{ "name": "Áo bảo hộ tay ngắn một màu", "description": "Đồng phục công nhân: chuyên dụng gồm  nhiều túi đựng dụng cụ giúp người mặc thuận tiện trong công việc. 2 túi xéo, 2 túi hậu và có thể có thêm 2 túi dọc 2 bên đáy vuông, có nắp đậy.", "price": 320000, "image": "image_1409915412_dong-phuc-cong-nhan.jpg", "quantity": 40, "productTypeId": ObjectId("6429af6f0e4acfb890a80c11"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf8")},
+{ "name": "Đồng phục công nhân may phản quang", "description": "Đồng phục công nhân may phản quang được quy đinh cụ thể và bắt buộc cho lực lượng công nhân trong công trình , môi trường để phong tránh tai nạn cho người lao động vào canh đêm", "price": 500000, "image": "image_1479548841_dong-phuc-cong-nhan-phan-quang-2.jpg", "quantity": 80, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfb"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf3")},
+{ "name": "Quần áo công nhân vệ sinh môi trường", "description": "Quần áo công nhân vệ sinh môi trường, được sản xuất theo dây chuyền công nghiệp, đảm bảo sản phẩm chất lượng, Đồng phục công nhân vệ sinh môi trường chúng tôi cung cấp, nhận với số lượng lớn đảm bảo thời gian nhanh nhất cho quý khách hàng.", "price": 300000, "image": "image_1432353964_quan-ao-cong-nhan-ve-sinh-moi-truong.jpg", "quantity": 120, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfb"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
+{ "name": "Giày bảo hộ Hans HS202 AIR", "description": "Đặc tính nổi trội của dòng sản phẩm HS-202 Air với đường may khéo léo, mũi thép chống va đập chuẩn quốc tế, lớp lót chống đâm xuyên. Lớp da bò tự nhiên cao cấp tạo cảm giác thoải mái khi mang giày trong thời gian dài", "price": 300000, "image": "Đặc tính nổi trội của dòng sản phẩm HS-202 Air với đường may khéo léo, mũi thép chống va đập chuẩn quốc tế, lớp lót chống đâm xuyên. Lớp da bò tự nhiên cao cấp tạo cảm giác thoải mái khi mang giày trong thời gian dài", "quantity": 80, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfd"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf6")},
+{ "name": "Ủng thùy dương mũi thép S1065", "description": "Kiểu dáng đế ủng được cải tiến giúp tăng độ cân bằng, chống trơn trượt và tạo độ bám tối đa trong mọi môi trường. Thích hợp sử dụng trong công trường xây dựng và các môi trường có độ nguy hiểm vật lý,va đập cao.", "price": 200000, "image": "image_1547763288_ung-mui-thep-thuy-duong-S1065.jpg", "quantity": 70, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfd"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf7")},
+{ "name": "Giày Safety Jogger CADOR S1P", "description": "Đế ngoài chống trượt, Tiêu chuẩn CE, Đế ngoài chống dầu và nhiên liệu, Thoáng khí phía trên", "price": 450000, "image": "image_1634024052_giay-bao-ho-jogger-cador-s1.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfd"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf6")},
+{ "name": "Áo liền quần chống tĩnh điện", "description": "Quần áo phòng sạch được làm từ vật liệu polyester, có sọc carbon chống tĩnh điện để sử dụng trong môi trường phòng sạch như điện tử, thực phẩm, dược phẩm, bệnh viện, phòng thí nghiệm….Việc sử dụng quần áo chống tĩnh điện này nhằm mục đích ngăn cản tối đa sự tiếp xúc giữa cơ thể.", "price": 500000, "image": "image_1475588431_quab-ao-chong-tinh-dien.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfb"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf8")},
+{ "name": "Áo thun cổ trụ sơ mi thời trang", "description": "Với nhiều kiểu dáng, mày sắc kết hợp khác nhau quay khác có thể chọn lựa cho công ty mình mẫu đồng phục văn phòng, công nhân. In, thêu logo thêu êu cầu khách hàng đảm bảo tính thẩm mỹ cho sản phẩm và giá cả hợp lý nhất.", "price": 230000, "image": "image_1562351949_ao-thun-co-tru-nam0nu-mau-vang-lon.jpg", "quantity": 30, "productTypeId": ObjectId("6429af6f0e4acfb890a80c11"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
+{ "name": "Nón bảo hộ safetyman GM16", "description": "Mũ được làm từ chất liệu ABS siêu bền và cứng, giúp bảo vệ đầu của bạn một cách an toàn. Khung nón có núm vặn giúp dễ dàng điều chỉnh kích thước phù hợp với cỡ đầu rất tiện lợi. Giữa khung nón và vỏ nón có khoảng cách nhất định nhằm bảo vệ đầu khi va chạm", "price": 300000, "image": "image_1669285123_non-gm-16-lon.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfc"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
+{ "name": "Mũ trùm đầu chịu nhiệt kết hợp nón AL19", "description": "Mũ trùm đầu chịu nhiệt kết hợp nón bảo hộ ABS + gọng lò xo A4 + kính chịu nhiệt FCR3. Dùng trong môi trường có nhiệt độ cao, chịu được nhiệt độ 250 độ C", "price": 270000, "image": "image_1617376113_da-9168.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfc"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
+]
+

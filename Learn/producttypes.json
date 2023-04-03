@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "6429a05c0e4acfb890a80bfb"
+  },
+  "name": "Đồng phục"
+},{
+  "_id": {
+    "$oid": "6429a05c0e4acfb890a80bfc"
+  },
+  "name": "Nón"
+},{
+  "_id": {
+    "$oid": "6429a05c0e4acfb890a80bfd"
+  },
+  "name": "Giày"
+},{
+  "_id": {
+    "$oid": "6429a05c0e4acfb890a80bfe"
+  },
+  "name": "Kính"
+},{
+  "_id": {
+    "$oid": "6429a05c0e4acfb890a80bff"
+  },
+  "name": "Găng tay"
+},{
+  "_id": {
+    "$oid": "6429af6f0e4acfb890a80c11"
+  },
+  "name": "Áo"
+},{
+  "_id": {
+    "$oid": "6429af6f0e4acfb890a80c12"
+  },
+  "name": "Quần"
+}]

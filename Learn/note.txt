@@ -1,0 +1,5 @@
+cart: chỉ chưa product name, số lượng
+comment: chỉ những người mua sản phẩm, mới được comment
+Invoice: product chứa đơn giá từng sản phẩm --> tính giá tổng trên view, không có tổng giá--> tiện cập nhật về sau
+	 chưa danh sách invoice detail, còn chi tiết từng sản phẩm sẽ được thể hiện trong InvoiceDetail
+InvoiceDetail: tạo id cho từng CTHD

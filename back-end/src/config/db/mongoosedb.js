@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const urlDb = 'mongodb://127.0.0.1:27017/test';
+const urlDb = 'mongodb://127.0.0.1:27017/shopbaoho';
 
 mongoose.connect(urlDb)
 .then(() => console.log('Connected to database successfully'))

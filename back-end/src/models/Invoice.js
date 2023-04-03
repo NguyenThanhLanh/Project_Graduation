@@ -4,10 +4,16 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const InvoiceSchema = new Schema({
-    invoiceNumber: { type: String, required: true },
+    userId: { type: ObjectId, ref: 'User'},
     date: { type: Date, required: true , default: Date.now()},
-    user: { type: ObjectId, ref: 'User'},
-    totalPrice: { type: Number, require: true, default: 0}
+    products: [
+        {
+            productId: { type: ObjectId, ref: 'Product', required: true },
+            quantity: { type: Number, required: true },
+            priceTotal: { type: Number, required: true }
+        }
+    ],
+    totalPrice: { type: Number, require: true } //
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);

@@ -1,12 +1,14 @@
+require('dotenv').config();
+
 const express = require('express');
 const morgan = require('morgan');
-const router = require("./routes/index"); // import route main
-const bodyParser = require('body-parser');
-const Book = require('./models/Role');
+const router = require("./routes/index"); // route main
 const db = require("./config/db/mongoosedb"); //connect database
+const bodyParser = require('body-parser');
+const myModel = require('./models/MyModel');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,10 +24,10 @@ const httpReq = morgan(function (tokens, req, res) {
 })
 
 router(app); //Route Init
-app.use(httpReq)
+app.use(httpReq);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })
 
 
