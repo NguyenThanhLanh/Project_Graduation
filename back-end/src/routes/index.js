@@ -1,26 +1,16 @@
 const product = require('./productRouter');
+const user = require('./userRouter')
 const jwt = require('jsonwebtoken');
 
 const author = require('../middleware/auth');
 
-
-const users = [
-    {
-        name: "thanhlanh"
-    },
-    {
-        name: "thanhlanh2"
-    },
-    {
-        name: "thanhlanh3"
-    },
-];
-
-function route(app){
+function router(app){
       
     app.use('/search', (req, res) => {
         res.send("Trang tìm kiếm");
     })
+
+    app.use('/user', user)
 
     app.use('/product', product);
     
@@ -38,4 +28,4 @@ function route(app){
     })
 }
 
-module.exports = route;
+module.exports = router;

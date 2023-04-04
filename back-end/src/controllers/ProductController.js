@@ -4,7 +4,7 @@ class ProductController {
     GetAllProducts(req, res){
         const query = Product.find({});
         query.then(products => res.json(products))
-            .catch(err => console.log(err));
+            .catch(err => res.status(500).send(err));
     }
 
     GetProductById(req, res){
@@ -24,14 +24,14 @@ class ProductController {
         const idPrd = req.param('id');
         Product.findByIdAndUpdate(idPrd, req.body, { new: true })
             .then(product => res.json(product))
-            .catch(err => err.status(500).send(err));
+            .catch(err => res.status(500).send(err));
     }
 
     DeleteProduct(req, res){
         const idPrd = req.param('id');
         Product.findByIdAndRemove(idPrd)
         .then(product => res.json(product))
-        .catch(err => err.status(500).send(err));
+        .catch(err => res.status(500).send(err));
     }
 
 }
