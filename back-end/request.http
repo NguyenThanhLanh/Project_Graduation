@@ -10,4 +10,28 @@ Content-Type: application/json
     "name": "thanhlanh"
 }
 
+### Product
+
+GET http://localhost:3000/product
 ###
+GET http://localhost:3000/product/6429c40aeb6a9b3799310f3d
+###
+POST http://localhost:3000/product
+
+{
+    "name": "Mũ trùm đầu chịu nhiệt kết hợp nón AL19",
+    "description": "Mũ trùm đầu chịu nhiệt kết hợp nón bảo hộ ABS + gọng lò xo A4 + kính chịu nhiệt FCR3. Dùng trong môi trường có nhiệt độ cao, chịu được nhiệt độ 250 độ C",
+    "price": 270000,
+    "image": "image_1617376113_da-9168.jpg",
+    "quantity": 3000000002
+}
+
+### 
+PUT  http://localhost:3000/product/642d9263c904f71838b3fa92
+
+{
+    "quantity": 5
+}
+
+###
+DELETE http://localhost:3000/product/642d916bf2b05d97c11becbd
