@@ -46,3 +46,12 @@ insert doc product
 { "name": "Mũ trùm đầu chịu nhiệt kết hợp nón AL19", "description": "Mũ trùm đầu chịu nhiệt kết hợp nón bảo hộ ABS + gọng lò xo A4 + kính chịu nhiệt FCR3. Dùng trong môi trường có nhiệt độ cao, chịu được nhiệt độ 250 độ C", "price": 270000, "image": "image_1617376113_da-9168.jpg", "quantity": 30, "productTypeId": ObjectId("6429a05c0e4acfb890a80bfc"), "suppilerId": ObjectId("64299eb40e4acfb890a80bf4")},
 ]
 
+User
+[
+{ "name": "ThanhLanh", "address": "HoaiNhon - BinhDinh", "email":"thanhlanh12a3@gmail.com", "phone":"0382056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b664") },
+{ "name": "CongDanh", "address": "Son La - Nghe An", "email":"thanhlanh12a4@gmail.com", "phone":"0382056288", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b665") },
+{ "name": "ZinZhao", "address": "Quận Cam", "email":"thanhlanh12a5@gmail.com", "phone":"0482056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b665") },
+{ "name": "Thanh123", "address": "Tam Quan", "email":"thanhlanh12a6@gmail.com", "phone":"0582056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b665") },
+{ "name": "LongNhat", "address": "Hoài Châu Bắc", "email":"thanhlanh12a7@gmail.com", "phone":"0682056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b665") },
+{ "name": "TrungHieu", "address": "Hoài Phú", "email":"thanhlanh12a8@gmail.com", "phone":"0782056287", "password": "1234", "refreshToken": null, "roleId": ObjectId("642995c183b260b43e04b665") }
+]
