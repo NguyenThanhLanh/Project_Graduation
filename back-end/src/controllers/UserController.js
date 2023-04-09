@@ -1,24 +1,24 @@
 const User = require('../models/User');
-
 class UserController {
     GetAllUser(req, res){
-        const query = User.find({});
+        const query = User.find().populate('roleId');
         query.then(users => res.json(users))
             .catch(err => res.status(500).send(err));
     }
 
     GetUserById(req, res){
         const idUser = req.param('id');
-        const query = User.findById(idUser);
+        const query = User.findById(idUser).populate('roleId');
         query.then(user => res.json(user))
             .catch(err => res.status(404).send('Not found'));
     }
 
-    AddNewUser(req, res){
-        const newUser = new User(req.body);
-        newUser.save().then(user => res.status(201).json(user))
-            .catch(err => res.status(500).send(err));
-    }
+    // AddNewUser(req, res){
+    //     const newUser = new User(req.body);
+    //     newUser.save().then(user => res.status(201).json(user))
+    //         .catch(err => res.status(500).send(err));
+    // }
+    
 
     UpdateUser(req, res){
         const idUser = req.param('id');
@@ -34,6 +34,7 @@ class UserController {
         .then(user => res.json(user))
         .catch(err => err.status(500).send(err));
     }
+
 }
 
 module.exports = new UserController;

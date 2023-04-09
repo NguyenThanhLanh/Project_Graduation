@@ -1,0 +1,6 @@
+bcryptjs
+nodejs
+express
+jwt
+
+
