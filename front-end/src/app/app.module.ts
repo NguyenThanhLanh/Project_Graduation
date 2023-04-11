@@ -9,7 +9,12 @@ import { RegisterComponent } from './register/register.component';
 import { MainHeaderComponent } from './_components/main-header/main-header.component';
 import { MainFooterComponent } from './_components/main-footer/main-footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginModule } from './login/login.module';
+import { MaterialModule } from 'material.module';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,12 +24,18 @@ import { LoginModule } from './login/login.module';
     RegisterComponent,
     MainHeaderComponent,
     MainFooterComponent,
+    LoginComponent,
+    MainHeaderComponent,
+    MainFooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LoginModule
+    MaterialModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,18 @@
+.header{
+}
+
+.above-header{
+    color: #fff;
+    background-color: #000;
+    .above-header-wrap{
+        height: 32px;
+        p{
+            margin: 0;
+            display: inline-block;
+        }
+        .above-header-icon{
+            margin-right: 8px;
+        }
+    }
+}
+
