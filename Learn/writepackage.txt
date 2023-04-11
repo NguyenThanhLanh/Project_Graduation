@@ -2,5 +2,16 @@ bcryptjs
 nodejs
 express
 jwt
+cors
+router
+cookie-parse
+mongoose
 
 
+name
+address
+email
+phone
+password
+refreshToken
+roleId

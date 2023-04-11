@@ -1,0 +1,11 @@
+Chức năng người dùng: 
+	Đăng nhập, Đăng xuất,
+	Thêm sản phẩm vào giỏ hàng, 
+	Thanh toán, Tra cứu lịch sử mua hàng, 
+	Chức năng đánh giá, Nhận xét sản phẩm.
+
+
+Chức năng quản trị: 
+	Đăng nhập, Đăng xuất, 
+	Quản lý đơn hàng,  
+	Thống kê doanh thu.

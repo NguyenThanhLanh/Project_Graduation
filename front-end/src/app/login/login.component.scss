@@ -1,0 +1,32 @@
+.width-full{
+    width: 100%;
+}
+
+.width-500px{
+    width: 500px;
+}
+
+.middle-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-header{
+    text-align: center;
+    font-weight: 500;
+    
+
+}
+
+.space-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#login{
+    width: 100vw;
+    height: 100vh;
+    background-color: #ccc;
+}
