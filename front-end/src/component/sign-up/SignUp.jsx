@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles.js";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { server } from "../../server.js";
 
 const SignUp = () => {
   const [nameUser, setNameUser] = useState("");
@@ -19,6 +21,31 @@ const SignUp = () => {
       .then((data) => setRoles(data));
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    const data = {
+      name: nameUser,
+      email: email,
+      address: address,
+      phone: phoneNumber,
+      password: password,
+      roleId: roleId,
+    };
+
+    console.log(data);
+
+    axios
+      .post(`${server}/register`, data, config)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   console.log(roleId);
 
   return (
@@ -30,7 +57,11 @@ const SignUp = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[52rem]">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 ">
-          <form className="space-y-6" autoComplete="on">
+          <form
+            className="space-y-6"
+            autoComplete="on"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <div className="flex">
               <div className="left w-2/4 pr-3">
                 <div>

@@ -6,9 +6,10 @@ const router = require("./routes/index"); // route main
 const db = require("./config/db/mongoosedb"); //connect database
 const myModel = require("./models/MyModel");
 const bodyParser = require("body-parser");
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-// const { showError } = require("./middleware/handleError");
+const ErrorHandler = require("./middleware/handleError");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,20 +24,22 @@ const httpReq = morgan(function (tokens, req, res) {
     "ms",
   ].join("");
 });
-
 app.use(httpReq);
+
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:4200", "http://localhost:3000"],
+    origin: ["http://localhost:3000", "http://localhost:3002"],
   })
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use("/", express.static(path.join(__dirname, "asset/uploads")));
+console.log(path.join(__dirname, "asset"));
 
 router(app); //Route Init
-// app.use(showError()); //handleError
+app.use(ErrorHandler); //handleError
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
