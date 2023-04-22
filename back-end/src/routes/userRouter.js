@@ -8,7 +8,6 @@ const UserController = require("../controllers/UserController");
 router.delete("/:id", verifyToken, verifyAdminAuth, UserController.DeleteUser);
 router.put("/:id", UserController.UpdateUser);
 router.get("/:id", UserController.GetUserById);
-// router.post('/', UserController.AddNewUser);
 router.get("/", verifyToken, verifyAdminAuth, UserController.GetAllUser);
 
 module.exports = router;

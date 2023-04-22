@@ -2,7 +2,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, res, cb) => {
-    cb(null, "images/sanpham/");
+    cb(null, "./src/asset/uploads");
   },
   filename: (res, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);

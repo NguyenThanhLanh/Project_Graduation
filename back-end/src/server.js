@@ -39,6 +39,7 @@ app.use("/", express.static(path.join(__dirname, "asset/uploads")));
 console.log(path.join(__dirname, "asset"));
 
 router(app); //Route Init
+
 app.use(ErrorHandler); //handleError
 
 app.listen(PORT, () => {

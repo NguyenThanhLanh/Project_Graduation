@@ -4,6 +4,7 @@ import styles from "../../styles/styles.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server.js";
+import { RxAvatar } from "react-icons/rx";
 
 const SignUp = () => {
   const [nameUser, setNameUser] = useState("");
@@ -14,6 +15,7 @@ const SignUp = () => {
   const [roleId, setRoleId] = useState("642995c183b260b43e04b665");
   const [roles, setRoles] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3002/role")
@@ -21,28 +23,48 @@ const SignUp = () => {
       .then((data) => setRoles(data));
   }, []);
 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setAvatar(file);
+  };
+  // console.log(avatar);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
     };
-    const data = {
-      name: nameUser,
-      email: email,
-      address: address,
-      phone: phoneNumber,
-      password: password,
-      roleId: roleId,
-    };
 
-    console.log(data);
+    const data = new FormData();
+    data.append("name", nameUser);
+    data.append("email", email);
+    data.append("address", address);
+    data.append("avatar", avatar);
+    data.append("phone", phoneNumber);
+    data.append("password", password);
+    data.append("roleId", roleId);
+
+    console.log([...data.entries()]);
 
     axios
       .post(`${server}/register`, data, config)
-      .then((res) => console.log(res))
+      .then((res) => {
+        alert(res.message);
+        //reset form
+        // alert(res.message)
+        // setNameUser("");
+        // setEmail("");
+        // setAddress("");
+        // setPassword("");
+        // setPhoneNumber("");
+        // setRoleId("642995c183b260b43e04b665");
+        // setAvatar(null);
+        // setVisible(false);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -196,6 +218,39 @@ const SignUp = () => {
                     ))}
                   </div>
                 </div>
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="avatar"
+                className="block text-sm font-medium text-gray-700"
+              ></label>
+              <div className="mt-2 flex items-center">
+                <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+                  {avatar ? (
+                    <img
+                      src={URL.createObjectURL(avatar)}
+                      alt="avatar"
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <RxAvatar className="h-8 w-8" />
+                  )}
+                </span>
+                <label
+                  htmlFor="file-input"
+                  className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:cursor-pointer"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    type="file"
+                    name="avatar"
+                    id="file-input"
+                    accept=".jpg,.jpeg,.png"
+                    onChange={(e) => handleFileInputChange(e)}
+                    className="sr-only"
+                  />
+                </label>
               </div>
             </div>
 
