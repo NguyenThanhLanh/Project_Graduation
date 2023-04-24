@@ -1,11 +1,13 @@
 const userModel = require("../models/User");
-const jwt = require("jsonwebtoken");
+const ErrorHandler = require("../utils/ErrorHandler");
+const sendToken = require("../utils/saveJwTTokenCookie");
 const bcrypt = require("bcryptjs");
 
 class LoginController {
-  HandleLogin = async (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+  HandleLogin = async (req, res, next) => {
+    const { username, password } = req.body;
+    if (!username || !password)
+      return next(new ErrorHandler("Nhập thiếu trường thông tin", 400));
 
     try {
       //viết theo async/await
@@ -15,36 +17,20 @@ class LoginController {
         })
         .populate("roleId");
 
-      if (!user) return res.json({ err: "Tài khoảng, mật khẩu không hợp lệ" });
+      if (!user)
+        return next(new ErrorHandler("Không tìm thấy tài khoảng", 400));
 
       //check password
-      let checkPassword = bcrypt.compareSync(password, user.password);
+      // let checkPassword = await user.comparePassword(password);
+      const checkPassword = bcrypt.compareSync(password, user.password);
       if (!checkPassword)
-        return res.status(400).json({ err: "Mật khẩu không đúng" });
+        return next(new ErrorHandler("Nhập sai mật khẩu!", 400));
 
-      //update refeshToken trong database
-      const loginToken = this.generateAccessToken(user);
-      res.cookie("jwtToken", loginToken, {
-        httpOnly: true,
-        secure: false,
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-      });
-
-      return res.send({ message: "Success" });
+      sendToken(user, 201, res);
     } catch (err) {
       console.log(err);
-      res.status(500).send({ error: err });
+      next(new ErrorHandler(err.message, 400));
     }
-  };
-
-  generateAccessToken = (payLoad) => {
-    const loginToken = jwt.sign({ payLoad }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "30s",
-    });
-    // const refeshToken = jwt.sign({ payLoad }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h'}); // create refeshToken
-
-    // return { loginToken, refeshToken };
-    return loginToken;
   };
 }
 

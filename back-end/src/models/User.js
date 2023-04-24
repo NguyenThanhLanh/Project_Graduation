@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const jwt = require("jsonwebtoken");
 
+const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
@@ -13,5 +14,11 @@ const UserSchema = new Schema({
   refreshToken: { type: String, default: null },
   roleId: { type: ObjectId, ref: "Role" },
 });
+
+UserSchema.methods.getJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
 
 module.exports = mongoose.model("User", UserSchema);

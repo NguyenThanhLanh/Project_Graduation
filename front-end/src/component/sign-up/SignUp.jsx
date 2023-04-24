@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server.js";
 import { RxAvatar } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [nameUser, setNameUser] = useState("");
@@ -30,7 +31,7 @@ const SignUp = () => {
   };
   // console.log(avatar);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
       headers: {
@@ -50,22 +51,22 @@ const SignUp = () => {
 
     console.log([...data.entries()]);
 
-    axios
+    await axios
       .post(`${server}/register`, data, config)
       .then((res) => {
-        alert(res.message);
+        console.log(res.data.message);
+        toast.success(res.data.message);
         //reset form
-        // alert(res.message)
-        // setNameUser("");
-        // setEmail("");
-        // setAddress("");
-        // setPassword("");
-        // setPhoneNumber("");
-        // setRoleId("642995c183b260b43e04b665");
-        // setAvatar(null);
-        // setVisible(false);
+        setNameUser("");
+        setEmail("");
+        setAddress("");
+        setPassword("");
+        setPhoneNumber("");
+        setRoleId("642995c183b260b43e04b665");
+        setAvatar(null);
+        setVisible(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.response.data.message));
   };
 
   console.log(roleId);

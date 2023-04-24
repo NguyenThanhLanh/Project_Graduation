@@ -1,6 +1,6 @@
-export function myFunction(statuCode, message) {
+module.exports = function myFunction(res, statuCode, message) {
   return {
-    statusCode: statuCode,
+    status: statuCode,
     message: message,
   };
-}
+};

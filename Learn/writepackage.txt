@@ -8,10 +8,3 @@ cookie-parse
 mongoose
 
 
-name
-address
-email
-phone
-password
-refreshToken
-roleId

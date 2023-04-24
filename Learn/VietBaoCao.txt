@@ -1,5 +1,10 @@
 FE
 axios => gửi file dưới dạng binary, server phải dùng thư viện để biên dịch lại file
+React-Toastify
+redux
+redux-thunk
+react-redux
+redux-toolkit
 
 
 BE

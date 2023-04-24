@@ -4,16 +4,13 @@ const path = require("path");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/SendMail");
-const { json } = require("body-parser");
 const ErrorHandler = require("../utils/ErrorHandler");
-
+const sendToken = require("../utils/saveJwTTokenCookie");
 class RegisterController {
   AddNewUser = async (req, res, next) => {
     try {
-      const salt = bcrypts.genSaltSync(10);
       // get fileName
       const fileName = req.file.filename;
-      console.log("nameAvatar", fileName);
       const fileUrl = path.join(fileName);
 
       const userRequest = req.body;
@@ -28,26 +25,21 @@ class RegisterController {
           { phone: userRequest.phone },
         ],
       });
-      console.log("Kết quả check Emtity: ", query);
-
+      // console.log("Kết quả check Emtity: ", query);
       if (query.length > 0) {
         // console.log(`src/asset/uploads/${fileUrl}`);
         fs.unlink(`src/asset/uploads/${fileUrl}`, (err) => {
           if (err) {
-            console.log(err);
-            res.status(500).json({ message: "Error deleting file" });
+            // console.log(err);
+            return next(new ErrorHandler("Error deleting file!", 500));
           }
         });
-        // return res.status(400).json({
-        //   status: "fail",
-        //   message: "UserName, Email, Password đã tồn tại",
-        // });
         return next(
-          new ErrorHandler("UserName, Email, Password đã tồn tại"),
-          400
+          new ErrorHandler("UserName, Email, Password đã tồn tại", 400)
         );
       }
 
+      const salt = bcrypts.genSaltSync(10);
       const hashPassword = bcrypts.hashSync(req.body.password, salt);
       userRequest.password = hashPassword;
       userRequest.avatar = fileUrl;
@@ -77,32 +69,23 @@ class RegisterController {
   };
 
   ActiveEmailUser = async (req, res, next) => {
+    console.log("Vào bước active");
     try {
-      const { activation_token } = req.body;
+      const { active_Token } = req.body;
+      // console.log(active_Token);
+      if (!active_Token)
+        return next(new ErrorHandler("Không nhận được token", 500));
 
-      const newUser = jwt.verify(
-        activation_token,
-        process.env.ACTIVATION_SECRET
-      );
+      const newUser = jwt.verify(active_Token, process.env.ACTIVATION_SECRET);
+      console.log(newUser);
       if (!newUser) return next(new ErrorHandler("Invalid token"), 400);
+      const { iat, exp, ...userSave } = newUser;
 
-      User(newUser)
+      const createUser = new User(userSave);
+      createUser
         .save()
-        .then((user) =>
-          res.status(201).json({
-            status: "susscess",
-            message: "Đã tạo User thành công",
-            user: user,
-          })
-        )
-        .catch((err) => {
-          console.log(err);
-          // res.status(500).json({
-          //   status: "fail",
-          //   message: "Lỗi",
-          // });
-          return next(new ErrorHandler(err.message, 500));
-        });
+        .then((user) => sendToken(createUser, 201, res))
+        .catch((err) => next(new ErrorHandler(err.message, 500)));
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
