@@ -20,7 +20,8 @@ class UserController {
   //loaduser
   LoadUser = async (req, res, next) => {
     try {
-      const user = await User.findById(req.user.id);
+      // console.log("user trong loaduser: ", req.user);
+      const user = await User.findById(req.user.id).populate("roleId");
       if (!user) return next(new ErrorHandler("User doesn't exists", 400));
       res.status(200).json({
         success: true,
@@ -33,7 +34,9 @@ class UserController {
 
   UpdateUser = (req, res) => {
     const idUser = req.param("id");
+    console.log("update: ", idUser);
     const updateUser = req.body;
+    console.log("update: ", updateUser);
     User.findByIdAndUpdate(idUser, updateUser, { new: true })
       .then((user) => res.json(user))
       .catch((err) => res.status(500).send(err));

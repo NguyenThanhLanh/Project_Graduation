@@ -42,7 +42,7 @@ const ProductDetailCard = ({ setOpen, data }) => {
                   alt="Product images"
                   className="w-[380px] h-[320px]"
                 />
-                <div className="flex">
+                {/* <div className="flex">
                   <img
                     src={data.shop.shop_avatar.url}
                     alt="Store images"
@@ -52,7 +52,7 @@ const ProductDetailCard = ({ setOpen, data }) => {
                     <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
                     <h5 className="pb-3 text-[15px]">(4.5) Ratings</h5>
                   </div>
-                </div>
+                </div> */}
 
                 <div
                   className={`${styles.button} bg-[#000] mt-4 rounded-[4px] h-11`}

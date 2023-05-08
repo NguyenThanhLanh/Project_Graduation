@@ -14,10 +14,20 @@ exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
 
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-  req.user = await User.findById(decoded.id);
+  req.user = await User.findById(decoded.id).populate("roleId");
+  // console.log("Xac thuc User: ", req.user);
 
   next();
 });
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user.roleId.name !== "admin") {
+    return next(
+      new ErrorHandler(`${req.user.roleId.name} can not access this resources!`)
+    );
+  }
+  next();
+};
 
 // exports.isSeller = catchAsyncErrors(async (req, res, next) => {
 //   const { seller_token } = req.cookies;

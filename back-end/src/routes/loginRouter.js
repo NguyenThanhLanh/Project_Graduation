@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const author = require('../middleware/auth');
+const author = require("../middleware/auth");
 
-const LoginController = require('../controllers/LoginController')
+const LoginController = require("../controllers/LoginController");
 
-router.post('/', LoginController.HandleLogin);
-// router.post('/', author);
-router.get('/', author)
+router.post("/", LoginController.HandleLogin);
+// router.post('/', author); bỏ
+// router.get('/', author) bỏ
 
 module.exports = router;
