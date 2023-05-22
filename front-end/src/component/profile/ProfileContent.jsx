@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { backend_url } from "../../server";
+import { backend_url, server } from "../../server";
 import { AiOutlineArrowRight, AiOutlineCamera } from "react-icons/ai";
 import { DataGrid } from "@material-ui/data-grid";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
-import { updateInfoUser } from "../../redux/actions/user";
+import { loadUser, updateInfoUser } from "../../redux/actions/user";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -14,19 +15,9 @@ const ProfileContent = ({ active }) => {
   const [email, setEmail] = useState(user && user.email);
   const [address, setAddress] = useState(user && user.address);
   const [phoneNumber, setPhoneNumber] = useState(user && user.phone);
+  const [avatar, setAvatar] = useState(user && user.avatar);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //     // dispatch({ type: "clearErrors" });
-  //   }
-  //   if (successMessage) {
-  //     toast.success(successMessage);
-  //     // dispatch({ type: "clearMessages" });
-  //   }
-  // }, [error, successMessage]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +31,31 @@ const ProfileContent = ({ active }) => {
     dispatch(updateInfoUser(user._id, formData));
     window.location.reload();
   };
-  // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", user);
+
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    setAvatar(file);
+
+    const formData = new FormData();
+
+    formData.append("image", e.target.files[0]);
+
+    await axios
+      .put(`${server}/user/update-image`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        dispatch(loadUser());
+        toast.success("avatar updated successfully!");
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
+
   return (
     <div className="w-full">
       {/* Profile */}
@@ -58,7 +73,7 @@ const ProfileContent = ({ active }) => {
                   type="file"
                   id="image"
                   className="hidden"
-                  // onChange={handleImage}
+                  onChange={handleImage}
                 />
                 <label htmlFor="image">
                   <AiOutlineCamera />

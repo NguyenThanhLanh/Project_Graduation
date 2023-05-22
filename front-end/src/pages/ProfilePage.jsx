@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
 import styles from "../styles/styles";
@@ -9,6 +9,9 @@ import ProfileContent from "../component/profile/ProfileContent.jsx";
 const ProfilePage = () => {
   const { loading } = useSelector((state) => state.user);
   const [active, setActive] = useState(1);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <Header />

@@ -3,22 +3,25 @@ import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
 import ProductDetail from "../component/products/ProductDetail.jsx";
 import SuggestedProduct from "../component/products/SuggestedProduct.jsx";
-import { useParams } from "react-router-dom";
-import { productData } from "../static/data";
+import { useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProductDetailPage = () => {
-  const { name } = useParams();
+  const { productData } = useSelector((state) => state.productData);
+  // const { id } = useParams();
+  const location = useLocation();
   const [data, setData] = useState(null);
-  const productName = name.replace(/-/g, " ");
-
-  console.log("product name:", productName);
-  console.log(productName);
 
   useEffect(() => {
-    const data = productData.find((i) => i.name === productName);
+    const allProductData = productData ? [...productData] : [];
+    const path = location.pathname;
+    const id = path.substring(path.lastIndexOf("/") + 1);
+    const data = allProductData.find((i) => i._id === id);
     setData(data);
-  }, []);
-  console.log("dữ liệu: ", data);
+    // console.log("id---------------------------", id);
+  }, [location]);
+
+  // console.log("dữ liệu: ", data);
   return (
     <div>
       <Header />

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
-import {
-  AiFillHeart,
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { server } from "../../server";
+import { toast } from "react-toastify";
+import { addTocart } from "../../redux/actions/cart";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetail = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cart);
+  const user = localStorage.user ? JSON.parse(localStorage.user) : null;
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -22,6 +24,25 @@ const ProductDetail = ({ data }) => {
       setCount(count - 1);
     }
   };
+
+  const addToCartHandler = (data) => {
+    if (user) {
+      const isItemExists = cart && cart.find((i) => i._id === data._id);
+      if (isItemExists) {
+        toast.error("Sản phẩm đã có trong giỏ hàng");
+      } else {
+        if (data.quantity < 1) {
+          toast.error("Sản phẩm đã hết hàng");
+        } else {
+          dispatch(addTocart(data));
+          toast.success("Item added to cart successfully!");
+        }
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập!");
+    }
+  };
+  console.log("Trang chi tiết sản phẩm: ", data);
   return (
     <div className="bg-white">
       {data ? (
@@ -30,41 +51,38 @@ const ProductDetail = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={data.image_Url[select].url}
+                  src={`${server}/${data.image_Url[select]}`}
                   alt=""
                   className="w-[80%]"
                 />
                 <div className="w-full flex">
-                  <div
-                    className={`${
-                      select === 0 ? "border" : "null"
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.image_Url[0].url}
-                      alt=""
-                      className="h-[200px]"
-                      onClick={() => setSelect(0)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      select === 1 ? "border" : "null"
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.image_Url[1].url}
-                      alt=""
-                      className="h-[200px]"
-                      onClick={() => setSelect(1)}
-                    />
-                  </div>
+                  {data?.image_Url.map((item, index) => {
+                    return (
+                      <div
+                        className={`${
+                          select === 0 ? "border" : "null"
+                        } cursor-pointer`}
+                        key={index}
+                      >
+                        <img
+                          src={`${server}/${item}`}
+                          alt=""
+                          className="h-[200px]"
+                          onClick={() => setSelect(index)}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
               <div className="w-full 800px:w-[50%]">
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
-                <p>{data.description}</p>
+                <p className="text-justify mt-6">{data.description}</p>
+                <p className="text-justify mt-6">
+                  <b>Nhà cung cấp: </b>
+                  {data.suppiler}
+                </p>
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
                     {data.discount_price}$
@@ -93,41 +111,17 @@ const ProductDetail = ({ data }) => {
                       +
                     </button>
                   </div>
-                  {/* hear */}
-                  <div>
-                    {click ? (
-                      <AiFillHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => setClick(false)}
-                        color={click ? "red" : "#333"}
-                        title="Remove from wishlist"
-                      />
-                    ) : (
-                      <AiOutlineHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => setClick(true)}
-                        title="Add to wishlist"
-                      />
-                    )}
-                  </div>
                 </div>
 
                 {/* CART button */}
                 <div
                   className={`${styles.button} mt-6 !rounded h-11 flex items-center`}
+                  onClick={() => addToCartHandler({ ...data, qty: count })}
                 >
                   <span className="text-white flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
-
-                {/* shop cart */}
-                {/* <div className="flex items-center pt-8">
-                  <img src={data.shop.shop_avatar.url} alt="" 
-                  className=""/>
-                </div> */}
               </div>
             </div>
           </div>

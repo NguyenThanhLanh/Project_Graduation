@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
+import CheckoutSteps from "../component/Checkout/CheckoutSteps";
+import Payment from "../component/Payment/Payment";
 
 const PaymentPage = () => {
   return (
@@ -8,8 +10,8 @@ const PaymentPage = () => {
       <Header />
       <br />
       <br />
-      {/* <CheckoutSteps active={2} />
-       <Payment /> */}
+      <CheckoutSteps active={2} />
+      <Payment />
       <br />
       <br />
       <Footer />

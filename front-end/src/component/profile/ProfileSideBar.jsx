@@ -9,15 +9,13 @@ import {
 } from "react-icons/md";
 import { AiOutlineLogin, AiOutlineMessage } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { TbAddressBook } from "react-icons/tb";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 
 const ProfileSideBar = ({ setActive, active }) => {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const logoutHandler = () => {
     axios
@@ -31,6 +29,8 @@ const ProfileSideBar = ({ setActive, active }) => {
       .catch((error) => {
         console.log(error.response.data.message);
       });
+
+    localStorage.removeItem("user");
   };
 
   return (

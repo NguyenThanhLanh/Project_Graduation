@@ -1,27 +1,39 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../../styles/styles";
-import {
-  AiFillHeart,
-  AiOutlineHeart,
-  AiOutlineMessage,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineMessage, AiOutlineShoppingCart } from "react-icons/ai";
+import { server } from "../../../server";
+import { toast } from "react-toastify";
+import { addTocart } from "../../../redux/actions/cart";
+import { useDispatch } from "react-redux";
 
-const ProductDetailCard = ({ setOpen, data }) => {
+const ProductDetailCard = ({ setOpen, data, cart }) => {
+  const user = localStorage.user ? JSON.parse(localStorage.user) : null;
   const [count, setCount] = useState(1);
-  const [click, setClick] = useState(false);
-  const [select, setSelect] = useState(false);
-
-  const addToWishlistHandler = () => {};
-  const removeFromWishlistHandler = () => {};
+  const dispatch = useDispatch();
   const incrementCount = () => {
     setCount(count + 1);
   };
   const decrementCount = () => {
     if (count > 1) setCount(count - 1);
   };
-  const addToCartHandler = () => {};
+  const addToCartHandler = (data) => {
+    if (user) {
+      const isItemExists = cart && cart.find((i) => i._id === data._id);
+      if (isItemExists) {
+        toast.error("Sản phẩm đã có trong giỏ hàng");
+      } else {
+        if (data.quantity < 1) {
+          toast.error("Sản phẩm đã hết hàng");
+        } else {
+          dispatch(addTocart(data));
+          toast.success("Item added to cart successfully!");
+        }
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập!");
+    }
+  };
 
   const handleMessageSubmit = () => {};
   return (
@@ -38,21 +50,10 @@ const ProductDetailCard = ({ setOpen, data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={data.image_Url[0].url}
+                  src={`${server}/${data.image_Url[0]}`}
                   alt="Product images"
                   className="w-[380px] h-[320px]"
                 />
-                {/* <div className="flex">
-                  <img
-                    src={data.shop.shop_avatar.url}
-                    alt="Store images"
-                    className="w-[50px] h-[50px] rounded-full mr-2"
-                  />
-                  <div>
-                    <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
-                    <h5 className="pb-3 text-[15px]">(4.5) Ratings</h5>
-                  </div>
-                </div> */}
 
                 <div
                   className={`${styles.button} bg-[#000] mt-4 rounded-[4px] h-11`}
@@ -62,7 +63,6 @@ const ProductDetailCard = ({ setOpen, data }) => {
                     Send Message <AiOutlineMessage className="ml-1" />
                   </span>
                 </div>
-                <h5 className="text-[16px] text-[red] mt-5">(50) Sold out</h5>
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">
@@ -100,29 +100,10 @@ const ProductDetailCard = ({ setOpen, data }) => {
                       +
                     </button>
                   </div>
-                  {/* hear */}
-                  <div>
-                    {click ? (
-                      <AiFillHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => setClick(false)}
-                        color={click ? "red" : "#333"}
-                        title="Remove from wishlist"
-                      />
-                    ) : (
-                      <AiOutlineHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => setClick(true)}
-                        title="Add to wishlist"
-                      />
-                    )}
-                  </div>
                 </div>
                 <div
                   className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}
-                  onClick={() => addToCartHandler(data._id)}
+                  onClick={() => addToCartHandler({ ...data, qty: count })}
                 >
                   <span className="text-[#fff] flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />

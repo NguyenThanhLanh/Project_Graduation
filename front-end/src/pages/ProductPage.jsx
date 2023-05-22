@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { productData } from "../static/data";
 import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
 import styles from "../styles/styles";
 import ProductCard from "../component/route/ProductCard/ProductCard";
+import { useSelector } from "react-redux";
 
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
+  const { productData } = useSelector((state) => state.productData);
   const categoryData = searchParams.get("category");
   console.log("danh muc:", categoryData);
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    const allProductData = productData ? [...productData] : [];
     if (categoryData === null) {
       const d =
-        productData && productData.sort((a, b) => a.total_sell - b.total_sell);
+        allProductData &&
+        allProductData.sort((a, b) => a.total_sell - b.total_sell);
       setData(d);
-      console.log("dataa Effect: ", data);
     } else {
       const d =
-        productData && productData.filter((i) => i.category === categoryData);
+        allProductData &&
+        allProductData.filter((i) => i.category === categoryData);
       setData(d);
-      console.log("dataa Effect: ", data);
     }
     window.scrollTo(0, 0);
   }, []);

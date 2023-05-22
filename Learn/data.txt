@@ -1,0 +1,40 @@
+categoriesData{
+  title: string
+  image_Url: string
+}
+
+productData{
+  name: string
+  description: string
+  image_Url: [{type: string}]
+  price: number
+  discount_price: number
+  total_sell: number
+  category: string
+}
+
+============Categories======================
+Đồng phục bảo hộ   image_category_dongphucbaoho.jpg
+Nón bảo hộ	image_category_nonbaoho.jpg
+Kính Bảo hộ	image_category_kinhbaoho.jpg
+Tạp dề		image_category_tapde.jpg	image_product_tapde-image1.jpg	image_product_tapde-image2.jpg	image_product_tapde-image3.jpg
+Áo khoác	image_category_aokhoac.jpg
+Mặt nạ bảo hộ	image_category_matna.jpg
+Dây an toàn	image_category_dayantoan.jpg
+Trang thiết bị phòng dịch	image_category_trangbiphongdich.jpg
+Găng tay bảo hộ		image_category_gangtay.jpg
+Giày bảo hộ	image_category_giaybaoho.jpg
+
+==============Product========================
+  name: { type: String, require: true },
+  description: { type: String, require: true },
+  price: { type: Number, require: true },
+  discount_price: { type: Number },
+  image_Url: [{ type: String }],
+  quantity: { type: Number, default: 0 },
+  category: { type: String },
+  suppiler: { type: String },
+  total_sell: { type: Number },
+
+
+

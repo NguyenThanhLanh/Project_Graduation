@@ -5,36 +5,55 @@ import {
   AiFillHeart,
   AiFillStar,
   AiOutlineEye,
-  AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
 import ProductDetailCard from "../ProductDetailCard/ProductDetailCard.jsx";
+import { server } from "../../../server";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addTocart } from "../../../redux/actions/cart";
 
 const ProductCard = ({ data }) => {
-  const [click, setClick] = useState(false);
+  const user = localStorage.user ? JSON.parse(localStorage.user) : null;
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cart);
 
-  const d = data.name;
-  const product_name = d.replace(/\s+/g, "-");
+  const product_id = data._id;
 
-  const removeFromWishlistHandler = () => {};
-  const addToWishlistHandler = () => {};
+  const addToCartHandle = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (user) {
+      if (isItemExists) {
+        toast.error("Sản phẩm đã có trong giỏ hàng");
+      } else {
+        if (data.quantity < 1) {
+          toast.error("Sản phẩm đã hết hàng");
+        } else {
+          const cartData = { ...data, qty: 1 };
+          dispatch(addTocart(cartData));
+          toast.success("Item added to cart successfully!");
+        }
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập!");
+    }
+  };
 
-  console.log("aaaaaaaaa: ", open);
+  console.log("Tên của sản phẩm được hconj: ", open);
 
   return (
     <>
       <div className="w-full h-[350px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end"></div>
-        <Link to={`/product/${product_name}`}>
+        <Link to={`/product/${product_id}`}>
           <img
-            src={data.image_Url[0].url}
+            src={`${server}/${data.image_Url[0]}`}
             alt=""
             className="w-full h-[170px] object-contain"
           />
-        </Link>
-        <Link to="/">
+
           <h4 className="pb-3 font-[500] mt-[30px]">
             {data.name.length > 40
               ? data.name.slice(0, 40) + " ..."
@@ -76,45 +95,32 @@ const ProductCard = ({ data }) => {
               </h5>
             </div>
           </div>
-
-          {/* side options */}
-          <div>
-            {click ? (
-              <AiFillHeart
-                size={22}
-                className="cursor-pointer absolute right-2 top-5"
-                onClick={() => setClick(!click)}
-                color={click ? "red" : "#333"}
-                title="Remove from wishlist"
-              />
-            ) : (
-              <AiOutlineHeart
-                size={22}
-                className="cursor-pointer absolute right-2 top-5"
-                onClick={() => setClick(!click)}
-                color={click ? "red" : "#333"}
-                title="Add to wishlist"
-              />
-            )}
-            <AiOutlineEye
-              size={22}
-              className="cursor-pointer absolute right-2 top-16"
-              onClick={() => setOpen(!open)}
-              color="#333"
-              title="Quick view"
-            />
-            <AiOutlineShoppingCart
-              size={22}
-              className="cursor-pointer absolute right-2 top-28"
-              onClick={() => setOpen(!open)}
-              color="#333"
-              title="Add to cart"
-            />
-            {open ? (
-              <ProductDetailCard open={open} setOpen={setOpen} data={data} />
-            ) : null}
-          </div>
         </Link>
+        {/* side options */}
+        <div>
+          <AiOutlineEye
+            size={22}
+            className="cursor-pointer absolute z-5 right-2 top-16"
+            onClick={() => setOpen(!open)}
+            color="#333"
+            title="Quick view"
+          />
+          <AiOutlineShoppingCart
+            size={22}
+            className="cursor-pointer absolute z-5 right-2 top-28"
+            onClick={() => addToCartHandle(data._id)}
+            color="#333"
+            title="Add to cart"
+          />
+          {open ? (
+            <ProductDetailCard
+              open={open}
+              setOpen={setOpen}
+              data={data}
+              cart={cart}
+            />
+          ) : null}
+        </div>
       </div>
     </>
   );

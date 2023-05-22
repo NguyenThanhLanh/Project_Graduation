@@ -11,6 +11,7 @@ export const userReducer = createReducer(initialState, {
   LoadUserSuccess: (state, action) => {
     state.isAuthenticated = true;
     state.loading = false;
+    localStorage.setItem("user", JSON.stringify(action.payload));
     state.user = action.payload;
   },
   LoadUserFail: (state, action) => {

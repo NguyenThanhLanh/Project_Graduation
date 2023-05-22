@@ -9,7 +9,7 @@ const CountDown = ({ data }) => {
   });
 
   function calculateTimeLeft() {
-    const difference = +new Date("2023-05-02") - +new Date(); // "+" support transfer date to timeshap
+    const difference = +new Date(data.Finish_Date) - +new Date(); // "+" support transfer date to timeshap
     let timeLeft = {};
 
     if (difference > 0) {

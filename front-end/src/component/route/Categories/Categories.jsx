@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { brandingData, categoriesData } from "../../../static/data";
+import { brandingData } from "../../../static/data";
 import styles from "../../../styles/styles";
+import { useSelector } from "react-redux";
+import { server } from "../../../server";
 
 const Categories = () => {
   const navigate = useNavigate();
+  const { categoriesData } = useSelector((state) => state.categoriesData);
+
   return (
     <>
       <div className={`${styles.section} hidden sm:block`}>
@@ -30,23 +34,25 @@ const Categories = () => {
       >
         <div className="grid grid-cols-1 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-[20px] xl:grid-cols-5 xl:gap-[30px]">
           {categoriesData &&
-            categoriesData.map((i) => {
+            [...categoriesData].map((i) => {
               const handleSubmit = (i) => {
-                navigate(`/products?category=${i.title}`);
+                navigate(`/products?category=${i.name}`);
               };
               return (
                 <div
                   className="w-full h-[100px] flex items-center  cursor-pointer overflow-hidden"
-                  key={i.id}
+                  key={i._id}
                   onClick={() => handleSubmit(i)}
                 >
                   <img
-                    src={i.image_Url}
-                    className="w-[100px] object-cover"
+                    src={`${server}/${i.image_Url}`}
+                    className="w-[60px] h-[60px] rounded-[4px] object-cover"
                     alt=""
                   />
-                  <h5 className={`text-[18px] leading-[1.3] ml-5`}>
-                    {i.title}
+                  <h5
+                    className={`leading-[1.3] ml-5 font text-[15px] font-medium`}
+                  >
+                    {i.name}
                   </h5>
                 </div>
               );

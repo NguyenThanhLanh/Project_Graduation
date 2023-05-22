@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/styles";
 import ProductCard from "../route/ProductCard/ProductCard";
-import { productData } from "../../static/data";
+import { useSelector } from "react-redux";
 
 const SuggestedProduct = ({ data }) => {
+  const { productData } = useSelector((state) => state.productData);
   const [product, setProductData] = useState(null);
   console.log("các sản phẩm liên quan: ", data.category);
 
   useEffect(() => {
     const prod =
-      productData && productData.filter((i) => i.category === data.category);
+      productData &&
+      [...productData].filter((i) => i.category === data.category);
     setProductData(prod);
   }, []);
   return (
     <div>
-      {data ? (
+      {product ? (
         <div className={`p-4 ${styles.section}`}>
           <h2
             className={`${styles.heading} text-[25px] font-[500] border-b mb-5`}
