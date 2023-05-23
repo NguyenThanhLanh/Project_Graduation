@@ -39,22 +39,14 @@ import { loadProduct } from "./redux/actions/product";
 import { loadCategories } from "./redux/actions/category";
 import { loadSuppiler } from "./redux/actions/suppiler";
 import { getAllEvent } from "./redux/actions/event";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import { server } from "./server";
+import { loadAllOrderAdmin } from "./redux/actions/order";
 
 const App = () => {
   const { loading } = useSelector((state) => state.user);
   const isAuthenticated = localStorage.getItem("user") ? true : false;
   const user = JSON.parse(localStorage.getItem("user"));
-  const [stripeApikey, setStripeApiKey] = useState("");
 
   console.log("Giá trị khởi tạo:----------------------", isAuthenticated, user);
-  async function getStripeApikey() {
-    const { data } = await axios.get(`${server}/payment/stripeapikey`);
-    setStripeApiKey(data.stripeApikey);
-  }
 
   useEffect(() => {
     Store.dispatch(loadUser());
@@ -62,20 +54,13 @@ const App = () => {
     Store.dispatch(loadCategories());
     Store.dispatch(loadSuppiler());
     Store.dispatch(getAllEvent());
-    getStripeApikey();
   }, []);
   return (
     <>
       {loading ? null : (
         <BrowserRouter>
-          {
-            <Elements stripe={loadStripe(stripeApikey)}>
-              <Routes>
-                <Route path="/payment" element={<PaymentPage />} />
-              </Routes>
-            </Elements>
-          }
           <Routes>
+            <Route path="/payment" element={<PaymentPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
@@ -87,7 +72,7 @@ const App = () => {
             <Route path="/faq" element={<FAQPage />} />
             {/* No done */}
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/order/success/:id" element={<OrderSuccessPage />} />
+            <Route path="/order/success" element={<OrderSuccessPage />} />
             <Route
               path="/profile"
               element={

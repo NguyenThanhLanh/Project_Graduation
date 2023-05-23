@@ -45,7 +45,7 @@ const ProfileSideBar = ({ setActive, active }) => {
             active === 1 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Profile
+          Cá nhân
         </span>
       </div>
 
@@ -59,11 +59,11 @@ const ProfileSideBar = ({ setActive, active }) => {
             active === 2 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Orders
+          Đặt hàng
         </span>
       </div>
 
-      <div
+      {/* <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(3)}
       >
@@ -75,7 +75,7 @@ const ProfileSideBar = ({ setActive, active }) => {
         >
           Change Password
         </span>
-      </div>
+      </div> */}
 
       {user && user?.roleId.name === "admin" && (
         <Link to="/admin/dashboard">
@@ -92,7 +92,7 @@ const ProfileSideBar = ({ setActive, active }) => {
                 active === 8 ? "text-[red]" : ""
               } 800px:block hidden`}
             >
-              Admin Dashboard
+              Trang quản trị
             </span>
           </div>
         </Link>
@@ -108,7 +108,7 @@ const ProfileSideBar = ({ setActive, active }) => {
             active === 8 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Log out
+          Đăng xuất
         </span>
       </div>
     </div>

@@ -14,13 +14,17 @@ const OrderSchema = new Schema({
     type: Object,
     required: true,
   },
+  shipping: {
+    type: Number,
+    required: true,
+  },
   amountPayment: {
     type: Number,
     required: true,
   },
-  status: {
-    type: String,
-    default: "Đang xử lý",
+  paymentInfo: {
+    type: Object,
+    required: true,
   },
   createdAt: {
     type: Date,

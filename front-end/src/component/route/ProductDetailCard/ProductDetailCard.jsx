@@ -55,14 +55,14 @@ const ProductDetailCard = ({ setOpen, data, cart }) => {
                   className="w-[380px] h-[320px]"
                 />
 
-                <div
+                {/* <div
                   className={`${styles.button} bg-[#000] mt-4 rounded-[4px] h-11`}
                   onClick={handleMessageSubmit}
                 >
                   <span className="text-[#fff] flex items-center">
                     Send Message <AiOutlineMessage className="ml-1" />
                   </span>
-                </div>
+                </div> */}
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">

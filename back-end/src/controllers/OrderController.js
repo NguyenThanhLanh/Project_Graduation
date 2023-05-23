@@ -9,9 +9,9 @@ class OrderController {
       .catch((error) => next(new ErrorHandler(error.message, 500)));
   }
 
-  GetOrderById(req, res) {
+  GetOrderById(req, res, next) {
     const idOrder = req.param("id");
-    const query = Order.findOne({ _id: idOrder });
+    const query = Order.find({ "user._id": idOrder });
     query
       .then((data) => res.json(data))
       .catch((error) => next(new ErrorHandler(error.message, 500)));

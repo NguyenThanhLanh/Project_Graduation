@@ -29,7 +29,7 @@ const AllSupplier = () => {
   const columns = [
     {
       field: "no",
-      headerName: "No.",
+      headerName: "Stt.",
       headerAlign: "center",
       width: 70,
       disableColumnMenu: true,
@@ -40,19 +40,19 @@ const AllSupplier = () => {
     {
       field: "name",
       headerAlign: "center",
-      headerName: "Supplier name",
+      headerName: "Tên nhà cung cấp",
       minWidth: 350,
     },
     {
       field: "address",
       disableColumnMenu: true,
-      headerName: "Address",
+      headerName: "Địa chỉ",
       minWidth: 150,
     },
     {
       field: "phone",
       headerAlign: "center",
-      headerName: "Phone number",
+      headerName: "Số điện thoại",
       minWidth: 130,
       align: "center",
       sortable: false,
@@ -70,7 +70,7 @@ const AllSupplier = () => {
     {
       field: "",
       width: 150,
-      headerName: "Function",
+      headerName: "Chức năng",
       headerAlign: "center",
       type: "number",
       disableColumnMenu: true,

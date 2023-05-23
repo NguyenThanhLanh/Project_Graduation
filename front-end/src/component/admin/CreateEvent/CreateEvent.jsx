@@ -85,12 +85,12 @@ const CreateEvent = () => {
 
   return (
     <div className="w-[90%] 800px:w-[70%] bg-white  shadow h-[80vh] rounded-[4px] p-3 overflow-y-scroll">
-      <h5 className="text-[30px] font-Poppins text-center">Create Event</h5>
+      <h5 className="text-[30px] font-Poppins text-center">Tạo mới Event</h5>
       <form onSubmit={(e) => handleSubmit(e)}>
         <br />
         <div>
           <label className="pb-2">
-            Name <span className="text-red-500">*</span>
+            Tiêu đề sự kiện <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -98,13 +98,13 @@ const CreateEvent = () => {
             value={name}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your product name..."
+            placeholder="Nhập tiêu đề sự kiện..."
           />
         </div>
         <br />
         <div>
           <label className="pb-2">
-            Description <span className="text-red-500">*</span>
+            Mô tả chi tiết <span className="text-red-500">*</span>
           </label>
           <textarea
             cols="30"
@@ -115,13 +115,13 @@ const CreateEvent = () => {
             value={description}
             className="mt-2 appearance-none block w-full pt-2 px-3 border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter your product description..."
+            placeholder="Nhập thông tin mô tả chi tiết..."
           ></textarea>
         </div>
         <br />
         <div>
           <label className="pb-2">
-            Event Start Date <span className="text-red-500">*</span>
+            Ngày bắt đầu <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
@@ -131,13 +131,13 @@ const CreateEvent = () => {
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => handleStartDateChange(e)}
             min={today}
-            placeholder="Enter your date name..."
+            placeholder="Nhập ngày bắt đầu sự kiện..."
           />
         </div>
         <br />
         <div>
           <label className="pb-2">
-            Date Finish <span className="text-red-500">*</span>
+            Ngày kết thúc <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
@@ -147,13 +147,13 @@ const CreateEvent = () => {
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => handleEndDateChange(e)}
             min={minEndDate}
-            placeholder="Enter your event product stock..."
+            placeholder="Nhập ngày kết thúc sự kiện..."
           />
         </div>
         <br />
         <div>
           <label className="pb-2">
-            Price <span className="text-red-500">*</span>
+            Giá <span className="text-red-500">*</span>
           </label>
           <input
             type="number"
@@ -161,13 +161,13 @@ const CreateEvent = () => {
             value={price}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setPrice(e.target.value)}
-            placeholder="Enter your product price (number)..."
+            placeholder="Nhập giá của sản phẩm (number)..."
           />
         </div>
         <br />
         <div>
           <label className="pb-2">
-            Discount Price <span className="text-red-500">*</span>
+            Giá sau khi giảm <span className="text-red-500">*</span>
           </label>
           <input
             type="number"
@@ -175,7 +175,7 @@ const CreateEvent = () => {
             value={discount_price}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setDiscount_price(e.target.value)}
-            placeholder="Enter your product price (number)..."
+            placeholder="Nhập giá bán ra của sản phẩm (number)..."
           />
         </div>
         <br />
@@ -200,7 +200,7 @@ const CreateEvent = () => {
               htmlFor="file-input"
               className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:cursor-pointer"
             >
-              <span>Upload a file</span>
+              <span>Upload hình ảnh</span>
               <input
                 type="file"
                 name="avatar"

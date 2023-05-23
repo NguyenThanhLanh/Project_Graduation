@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { loadUser, updateInfoUser } from "../../redux/actions/user";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { loadAllOrderUser } from "../../redux/actions/order";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -157,85 +158,105 @@ const ProfileContent = ({ active }) => {
 };
 
 const AllOrders = () => {
-  const orders = [
-    {
-      _id: "123456",
-      orderItems: [
-        {
-          name: "Đồ bảo hộ dương châu",
-        },
-      ],
-      totalPrice: 120,
-      orderStatus: "Processing",
-    },
-  ];
-
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const { orderData } = useSelector((state) => state.orderData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadAllOrderUser(user._id));
+  }, []);
+  const orders = orderData ? [...orderData] : [];
+  console.log("Tất cả order: ", orders);
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    {
+      field: "no",
+      headerName: "No.",
+      headerAlign: "center",
+      width: 70,
+      disableColumnMenu: true,
+      sortable: false,
+      align: "center",
+      renderCell: (params) => params.row.no + 1,
+    },
 
     {
       field: "status",
-      headerName: "Status",
-      minWidth: 130,
-      flex: 0.7,
+      headerName: "Trạng thái đơn",
+      minWidth: 150,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "Đang xử lý"
           ? "greenColor"
           : "redColor";
       },
+      align: "center",
+      sortable: false,
+      disableColumnMenu: true,
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 130,
-      flex: 0.7,
+      headerName: "Số lượng sản phẩm",
+      headerAlign: "center",
+      width: 200,
+      disableColumnMenu: true,
+      sortable: true,
+      align: "center",
     },
 
     {
       field: "total",
-      headerName: "Total",
-      type: "number",
-      minWidth: 130,
-      flex: 0.8,
-    },
-
-    {
-      field: " ",
-      flex: 1,
-      minWidth: 150,
-      headerName: "",
-      type: "number",
+      headerName: "Tổng tiền",
+      headerAlign: "center",
+      width: 150,
+      disableColumnMenu: true,
       sortable: false,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={`/user/order/${params.id}`}>
-              <button>
-                <AiOutlineArrowRight size={20} />
-              </button>
-            </Link>
-          </>
-        );
-      },
+      align: "right",
     },
+    {
+      field: "address",
+      headerName: "Địa chỉ nhận hàng",
+      headerAlign: "center",
+      width: 350,
+      disableColumnMenu: true,
+      sortable: false,
+      align: "left",
+    },
+    // {
+    //   field: " ",
+    //   minWidth: 40,
+    //   headerName: "",
+    //   type: "number",
+    //   sortable: false,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <Link to={`/user/order/${params.id}`}>
+    //           <button>
+    //             <AiOutlineArrowRight size={20} />
+    //           </button>
+    //         </Link>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   const row = [];
-
-  orders &&
+  orders.length > 0 &&
     orders.forEach((item) => {
       row.push({
         id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "US$ " + item.totalPrice,
-        status: item.orderStatus,
+        no: item.no,
+        address: `${item.shippingAddress.address}, ${item.shippingAddress.city}, ${item.shippingAddress.country}`,
+        itemsQty: item.cart.length,
+        total: "US$ " + item.amountPayment,
+        status: item.paymentInfo.status,
       });
     });
   return (
     <div className="pl-8 pt-1">
       <DataGrid
-        rows={row}
+        rows={row.map((row, index) => ({ ...row, no: index }))}
         columns={columns}
         pageSize={10}
         disableSelectionOnClick
