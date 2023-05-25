@@ -5,7 +5,7 @@ import { RxAvatar } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createEvent } from "../../../redux/actions/event";
+import { createEvent, getAllEvent } from "../../../redux/actions/event";
 
 const CreateEvent = () => {
   const navigate = useNavigate();
@@ -78,9 +78,20 @@ const CreateEvent = () => {
     newForm.append("image_Url", imgEvent);
 
     dispatch(createEvent(newForm));
-    setTimeout(() => {
-      toast.error();
-    }, 1000);
+    if (error) {
+      toast.error("Đã xảy ra lỗi!");
+    }
+    if (success) {
+      dispatch(getAllEvent());
+      toast.success("Tạo mới event thành công");
+      setImgEvent(null);
+      setName("");
+      setDescription("");
+      setPrice("");
+      setDiscount_price("");
+      setStartDate(null);
+      setStartDate(null);
+    }
   };
 
   return (

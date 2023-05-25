@@ -61,6 +61,8 @@ export const deleteProduct = (idPrd) => async (dispatch) => {
       type: "DeleteProductSuccess",
       payload: data.message,
     });
+
+    dispatch(loadProduct());
   } catch (error) {
     dispatch({
       type: "DeleteProductFaild",

@@ -24,7 +24,7 @@ const ProductDetailPage = () => {
   // console.log("dữ liệu: ", data);
   return (
     <div>
-      <Header />
+      <Header activeHeading={3} />
       <ProductDetail data={data} />
       {data && <SuggestedProduct data={data} />}
       <Footer />

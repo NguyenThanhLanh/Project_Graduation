@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createSuppiler } from "../../../redux/actions/suppiler";
+import { createSuppiler, loadSuppiler } from "../../../redux/actions/suppiler";
 
 const CreateSuppiler = () => {
   // const { user } = useSelector((state) => state.user);
@@ -32,16 +32,15 @@ const CreateSuppiler = () => {
     }
 
     if (success) {
+      dispatch(loadSuppiler());
       toast.success("Created new supplier ");
       setName("");
       setAddress("");
       setPhone("");
       setEmail("");
-      //   navigate("/admin/supplier");
+      // navigate("/admin/supplier");
+      // navigate("/admin/supplier");
     }
-
-    // navigate("/admin/supplier");
-    // window.location.reload();
   };
 
   return (

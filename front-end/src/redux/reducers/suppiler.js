@@ -12,6 +12,7 @@ export const suppilerReducer = createReducer(initialState, {
   LoadSuppilerRequestSuccess: (state, action) => {
     state.isLoading = false;
     state.suppilerData = action.payload;
+    state.success = true;
     // console.log("danh sach cate: ", state.categoriesData);
   },
 
@@ -27,7 +28,7 @@ export const suppilerReducer = createReducer(initialState, {
 
   CreateSuppilerRequestSuccess: (state, action) => {
     state.isLoading = false;
-    state.suppilerData = action.payload;
+    state.newSuppiler = action.payload;
     // console.log("danh sach cate: ", state.categoriesData);
   },
 
@@ -43,7 +44,8 @@ export const suppilerReducer = createReducer(initialState, {
 
   DeleteSuppilerRequestSuccess: (state, action) => {
     state.isLoading = false;
-    state.suppilerData = action.payload;
+    state.success = true;
+    state.message = action.payload;
     // console.log("danh sach cate: ", state.categoriesData);
   },
 

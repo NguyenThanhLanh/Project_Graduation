@@ -13,15 +13,13 @@ const AllEvent = () => {
 
   useEffect(() => {
     dispatch(getAllEvent());
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (idPrd) => {
     dispatch(deleteEvent(idPrd));
-    window.location.reload();
-    console.log(idPrd);
   };
 
-  console.log(eventData);
+  // console.log(eventData);
   const columns = [
     {
       field: "no",

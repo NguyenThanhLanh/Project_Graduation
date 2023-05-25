@@ -25,7 +25,7 @@ export const createEvent = (newPrd) => async (dispatch) => {
   }
 };
 
-export const getAllEvent = (newPrd) => async (dispatch) => {
+export const getAllEvent = () => async (dispatch) => {
   try {
     dispatch({
       type: "GetAllEventRequest",
@@ -62,6 +62,8 @@ export const deleteEvent = (idPrd) => async (dispatch) => {
       type: "DeleteEventSuccess",
       payload: data,
     });
+
+    dispatch(getAllEvent());
   } catch (error) {
     dispatch({
       type: "DeleteEventFaid",

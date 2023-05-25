@@ -10,21 +10,20 @@ const AllSupplier = () => {
   const { suppilerData, isLoading } = useSelector(
     (state) => state.suppilerData
   );
-  const suppilerDataRender = suppilerData ? [...suppilerData] : [];
-  console.log("1111111111111111111111111111111111111", suppilerData);
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     window.location.reload();
-  //   }, []);
-
   useEffect(() => {
+    // dispatch(loadSuppiler());
     dispatch(loadSuppiler());
+    // window.location.reload();
+
+    console.log("COnenljsdf;ahsdkfajsdhfkjasdhfkalsdhfaklsdjfhaksldfh");
   }, [dispatch]);
 
   const handleDelete = (idPrd) => {
     dispatch(deleteSuppiler(idPrd));
-    window.location.reload();
+    // window.location.reload();
+    dispatch(loadSuppiler());
   };
   const columns = [
     {
@@ -102,7 +101,7 @@ const AllSupplier = () => {
 
   const row = [];
 
-  suppilerDataRender.length !== 0 &&
+  suppilerData &&
     [...suppilerData].forEach((item) => {
       row.push({
         id: item._id,

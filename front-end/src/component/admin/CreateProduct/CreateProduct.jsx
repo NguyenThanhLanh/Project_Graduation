@@ -3,7 +3,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createProduct } from "../../../redux/actions/product";
+import { createProduct, loadProduct } from "../../../redux/actions/product";
 
 const CreateProduct = () => {
   // const { user } = useSelector((state) => state.user);
@@ -53,6 +53,25 @@ const CreateProduct = () => {
       console.log(entry[0], entry[1]);
     }
     dispatch(createProduct(formData));
+    if (error) {
+      toast.error("Don't create supplier ");
+    }
+
+    if (success) {
+      dispatch(loadProduct());
+      toast.success("Created new supplier ");
+      setImages(null);
+      setName("");
+      setDescription("");
+      setPrice("");
+      setDiscount_price("");
+      setQuantity("");
+      setCategory("");
+      setSuppiler("");
+      setTotal_sell(0);
+      // navigate("/admin/supplier");
+      // navigate("/admin/supplier");
+    }
   };
 
   const handleImageChange = (e) => {

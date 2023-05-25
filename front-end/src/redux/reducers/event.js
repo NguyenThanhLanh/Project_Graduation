@@ -12,8 +12,9 @@ export const eventReducer = createReducer(initialState, {
 
   CreateEventSuccess: (state, action) => {
     state.isLoading = false;
-    state.eventData = action.payload;
+    state.newEvent = action.payload;
     state.success = true;
+    state.error = false;
     // console.log("danh sach cate: ", state.categoriesData);
   },
 

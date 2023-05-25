@@ -10,7 +10,6 @@ import Loader from "../../layout/Loader";
 const AllProduct = () => {
   const { productData, isLoading } = useSelector((state) => state.productData);
   const dispatch = useDispatch();
-  const [counter, setCounter] = useState(1);
 
   useEffect(() => {
     dispatch(loadProduct());

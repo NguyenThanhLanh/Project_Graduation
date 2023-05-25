@@ -4,7 +4,8 @@ import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
 import styles from "../styles/styles";
 import ProductCard from "../component/route/ProductCard/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadProduct } from "../redux/actions/product";
 
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
@@ -12,8 +13,24 @@ const ProductPage = () => {
   const categoryData = searchParams.get("category");
   console.log("danh muc:", categoryData);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const allProductData = productData ? [...productData] : [];
+    if (categoryData === null) {
+      const d =
+        allProductData &&
+        allProductData.sort((a, b) => a.total_sell - b.total_sell);
+      setData(d);
+    } else {
+      const d =
+        allProductData &&
+        allProductData.filter((i) => i.category === categoryData);
+      setData(d);
+    }
+  }, [productData]);
 
   useEffect(() => {
+    dispatch(loadProduct());
     const allProductData = productData ? [...productData] : [];
     if (categoryData === null) {
       const d =
@@ -28,7 +45,7 @@ const ProductPage = () => {
     }
     window.scrollTo(0, 0);
   }, []);
-  console.log("dataaa: ", data);
+  console.log("dataaa: ", productData);
   return (
     <>
       <Header activeHeading={3} />

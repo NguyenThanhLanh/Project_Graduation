@@ -75,7 +75,7 @@ const SignUp = () => {
     <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Register as a new user
+          Đăng ký tài khoản mới
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[52rem]">
@@ -92,7 +92,7 @@ const SignUp = () => {
                     htmlFor="nameUser"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    User Name
+                    Tên tài khoản
                   </label>
                   <div className="mt-1">
                     <input
@@ -111,7 +111,7 @@ const SignUp = () => {
                     htmlFor="nameUser"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    Address
+                    Địa chỉ
                   </label>
                   <div className="mt-1">
                     <input
@@ -130,7 +130,7 @@ const SignUp = () => {
                     htmlFor="nameUser"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    Phone Number
+                    Số điện thoại
                   </label>
                   <div className="mt-1">
                     <input
@@ -169,7 +169,7 @@ const SignUp = () => {
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    Password
+                    Mật khẩu
                   </label>
                   <div className="mt-1 relative">
                     <input
@@ -201,7 +201,7 @@ const SignUp = () => {
                     htmlFor="nameUser"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    Role
+                    Quyển quản trị
                   </label>
                   <div className="mt-3 flex pl-14">
                     {roles.map((item) => (
@@ -242,7 +242,7 @@ const SignUp = () => {
                   htmlFor="file-input"
                   className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:cursor-pointer"
                 >
-                  <span>Upload a file</span>
+                  <span>Tải ảnh lên</span>
                   <input
                     type="file"
                     name="avatar"
@@ -260,13 +260,13 @@ const SignUp = () => {
                 type="submit"
                 className="group relative w-full bg-violet-600 hover:bg-violet-700 py-3 rounded-md text-white font-bold cursor-pointer"
               >
-                Register
+                Đăng ký
               </button>
             </div>
             <div className={`${styles.normalFlex}`}>
-              <h4>Back to login page?</h4>
+              <h4>Quay lại đăng nhập?</h4>
               <Link to="/sign-in" className="text-blue-600 pl-2">
-                Sign In
+                Đăng nhập
               </Link>
             </div>
           </form>

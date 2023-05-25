@@ -36,7 +36,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Login with your account
+          Đăng nhập
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -53,7 +53,7 @@ const Login = () => {
                 htmlFor="nameUser"
                 className="block text-sm font-medium text-gray-700"
               >
-                User Name
+                Tên tài khoản
               </label>
               <div className="mt-1">
                 <input
@@ -71,7 +71,7 @@ const Login = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Password
+                Mật khẩu
               </label>
               <div className="mt-1 relative">
                 <input
@@ -109,7 +109,7 @@ const Login = () => {
                   htmlFor="remember-me"
                   className="ml-2 block text-sm text-gray-900"
                 >
-                  Remember me
+                  Lưu mật khẩu
                 </label>
               </div>
               <div className="text-sm">
@@ -117,7 +117,7 @@ const Login = () => {
                   to="/forgot-password"
                   className="font-medium text-blue-600 hover:text-blue-500"
                 >
-                  Forgot your password?
+                  Quên mật khẩu?
                 </Link>
               </div>
             </div>
@@ -126,13 +126,13 @@ const Login = () => {
                 type="submit"
                 className="group relative w-full bg-violet-600 hover:bg-violet-700 py-3 rounded-md text-white font-bold cursor-pointer"
               >
-                Login
+                Đăng nhập
               </button>
             </div>
             <div className={`${styles.normalFlex}`}>
-              <h4>Not have any account?</h4>
+              <h4>Bạn chưa có tài khoản?</h4>
               <Link to="/sign-up" className="text-blue-600 pl-2">
-                Sign Up
+                Đăng ký
               </Link>
             </div>
           </form>
