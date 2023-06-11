@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 const BestDeals = () => {
   const { productData } = useSelector((state) => state.productData);
   const [data, setData] = useState([]);
-  console.log("productDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", productData);
-  console.log("productData", data);
+  // console.log("productDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", productData);
+  // console.log("productData", data);
 
   useEffect(() => {
     const allProductData = productData ? [...productData] : [];

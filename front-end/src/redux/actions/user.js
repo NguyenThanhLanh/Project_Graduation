@@ -50,3 +50,25 @@ export const updateInfoUser = (userId, formdata) => async (dispatch) => {
     });
   }
 };
+
+export const logOutUser = async (dispatch) => {
+  try {
+    dispatch({
+      type: "LogOutUserRequest",
+    });
+    await axios
+      .get(`${server}/logout`, { withCredentials: true })
+      .then((res) => {
+        localStorage.removeItem("user");
+      });
+    dispatch({
+      type: "LogOutUserSuccess",
+      payload: "Đăng xuất thành công",
+    });
+  } catch (error) {
+    dispatch({
+      type: "LogOutUserFail",
+      payload: "Đăng xuất thất bại",
+    });
+  }
+};

@@ -44,17 +44,6 @@ const CreateEvent = () => {
         .slice(0, 10)
     : "";
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //   }
-  //   if (success) {
-  //     toast.success("Event created successfully!");
-  //     navigate("/admin/events");
-  //     window.location.reload();
-  //   }
-  // }, [dispatch, error, success]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -6,10 +6,12 @@ import AdminGetEventPage from "./pages/admin/AdminGetEventPage.jsx";
 import AdminCreateEventPage from "./pages/admin/AdminCreateEventPage.jsx";
 import AdminCreateSupplierPage from "./pages/admin/AdminCreateSupplierPage.jsx";
 import AdminGetAllSupplierPage from "./pages/admin/AdminGetAllSupplierPage.jsx";
+import UpdateProductPage from "./pages/admin/UpdateProductPage.jsx";
 
 export {
   AdminDashboardPage,
   CreateProductPage,
+  UpdateProductPage,
   AdminGetProductPage,
   AdminGetOrderPage,
   AdminGetEventPage,

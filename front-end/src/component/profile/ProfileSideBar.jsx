@@ -12,25 +12,32 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { loadAllOrderAdmin } from "../../redux/actions/order";
+import { logOutUser } from "../../redux/actions/user";
 
 const ProfileSideBar = ({ setActive, active }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
+  const handleManager = async () => {
+    setActive(7);
+    await dispatch(loadAllOrderAdmin());
+    navigate("/admin/dashboard");
+  };
 
-  const logoutHandler = () => {
-    axios
-      .get(`${server}/logout`, { withCredentials: true })
-      .then((res) => {
-        toast.success(res.data.message);
-        navigate("/");
-        window.location.reload(true);
-        // navigate("/sign-in");
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
+  const logoutHandler = async () => {
+    try {
+      await dispatch(logOutUser);
+      localStorage.removeItem("user");
 
-    localStorage.removeItem("user");
+      navigate("/");
+      // window.location.reload(true);
+      // navigate("/sign-in");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      // console.log(error.response.data.message);
+    }
   };
 
   return (
@@ -78,24 +85,22 @@ const ProfileSideBar = ({ setActive, active }) => {
       </div> */}
 
       {user && user?.roleId.name === "admin" && (
-        <Link to="/admin/dashboard">
-          <div
-            className="flex items-center cursor-pointer w-full mb-8"
-            onClick={() => setActive(8)}
+        <div
+          className="flex items-center cursor-pointer w-full mb-8"
+          onClick={handleManager}
+        >
+          <MdOutlineAdminPanelSettings
+            size={20}
+            color={active === 7 ? "red" : ""}
+          />
+          <span
+            className={`pl-3 ${
+              active === 7 ? "text-[red]" : ""
+            } 800px:block hidden`}
           >
-            <MdOutlineAdminPanelSettings
-              size={20}
-              color={active === 7 ? "red" : ""}
-            />
-            <span
-              className={`pl-3 ${
-                active === 8 ? "text-[red]" : ""
-              } 800px:block hidden`}
-            >
-              Trang quản trị
-            </span>
-          </div>
-        </Link>
+            Trang quản trị
+          </span>
+        </div>
       )}
 
       <div

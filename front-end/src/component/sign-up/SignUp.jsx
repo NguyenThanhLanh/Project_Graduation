@@ -17,6 +17,8 @@ const SignUp = () => {
   const [roles, setRoles] = useState([]);
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
+  const [keyAdmin, setKeyAdmin] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3002/role")
@@ -26,10 +28,17 @@ const SignUp = () => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    // console.log(file);
     setAvatar(file);
   };
-  // console.log(avatar);
+  const activeAdmin = () => {
+    if (keyAdmin === "thanhlanh") {
+      const element = document.querySelectorAll(".setRoleId");
+      element.forEach((item) => {
+        item.removeAttribute("disabled");
+      });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,12 +58,12 @@ const SignUp = () => {
     data.append("password", password);
     data.append("roleId", roleId);
 
-    console.log([...data.entries()]);
+    // console.log([...data.entries()]);
 
     await axios
       .post(`${server}/register`, data, config)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
         toast.success(res.data.message);
         //reset form
         setNameUser("");
@@ -69,7 +78,7 @@ const SignUp = () => {
       .catch((err) => toast.error(err.response.data.message));
   };
 
-  console.log(roleId);
+  // console.log(roleId);
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -143,6 +152,43 @@ const SignUp = () => {
                     />
                   </div>
                 </div>
+                <div>
+                  {/* start */}
+                  <label
+                    htmlFor="avatar"
+                    className="block text-sm font-medium text-gray-700 mt-3"
+                  >
+                    Ảnh đại diện
+                  </label>
+                  <div className="mt-2 flex items-center">
+                    <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+                      {avatar ? (
+                        <img
+                          src={URL.createObjectURL(avatar)}
+                          alt="avatar"
+                          className="h-full w-full object-cover rounded-full"
+                        />
+                      ) : (
+                        <RxAvatar className="h-8 w-8" />
+                      )}
+                    </span>
+                    <label
+                      htmlFor="file-input"
+                      className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:cursor-pointer"
+                    >
+                      <span>Tải ảnh lên</span>
+                      <input
+                        type="file"
+                        name="avatar"
+                        id="file-input"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => handleFileInputChange(e)}
+                        className="sr-only"
+                      />
+                    </label>
+                  </div>
+                  {/* end */}
+                </div>
               </div>
               <div className="right w-2/4 pl-3">
                 <div>
@@ -201,57 +247,50 @@ const SignUp = () => {
                     htmlFor="nameUser"
                     className="block text-sm font-medium text-gray-700 mt-3"
                   >
-                    Quyển quản trị
+                    Nhập mật khẩu để đăng ký admin
+                  </label>
+                  <div className="mt-1 flex">
+                    <input
+                      type="text"
+                      name="keyAdmin"
+                      required
+                      value={keyAdmin}
+                      onChange={(e) => setKeyAdmin(e.target.value)}
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                    <div
+                      onClick={activeAdmin}
+                      className=" flex items-center justify-center group relative w-1/2 bg-violet-600 hover:bg-violet-700 rounded-md text-white cursor-pointer ml-[20px]"
+                    >
+                      Xác nhận
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="nameUser"
+                    className="block text-sm font-medium text-gray-700 mt-3"
+                  >
+                    Quyền quản trị
                   </label>
                   <div className="mt-3 flex pl-14">
                     {roles.map((item) => (
                       <div key={item._id} className="mr-5">
                         <input
                           type="radio"
+                          disabled
                           checked={roleId === item._id}
                           onChange={() => {
                             setRoleId(item._id);
                           }}
-                          className="mr-2"
+                          className="mr-2 setRoleId"
                         />
                         {item.name}
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="avatar"
-                className="block text-sm font-medium text-gray-700"
-              ></label>
-              <div className="mt-2 flex items-center">
-                <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
-                  {avatar ? (
-                    <img
-                      src={URL.createObjectURL(avatar)}
-                      alt="avatar"
-                      className="h-full w-full object-cover rounded-full"
-                    />
-                  ) : (
-                    <RxAvatar className="h-8 w-8" />
-                  )}
-                </span>
-                <label
-                  htmlFor="file-input"
-                  className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:cursor-pointer"
-                >
-                  <span>Tải ảnh lên</span>
-                  <input
-                    type="file"
-                    name="avatar"
-                    id="file-input"
-                    accept=".jpg,.jpeg,.png"
-                    onChange={(e) => handleFileInputChange(e)}
-                    className="sr-only"
-                  />
-                </label>
               </div>
             </div>
 

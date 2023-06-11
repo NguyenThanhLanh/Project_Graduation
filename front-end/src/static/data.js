@@ -25,8 +25,8 @@ export const navItems = [
 export const brandingData = [
   {
     id: 1,
-    title: "Free Shipping",
-    Description: "From all orders over 100$",
+    title: "Miễn phí vận chuyển",
+    Description: "Với những đơn hơn 100$",
     icon: (
       <svg
         width="36"
@@ -75,8 +75,8 @@ export const brandingData = [
   },
   {
     id: 2,
-    title: "Daily Surprise Offers",
-    Description: "Save up to 25% off",
+    title: "Ưu đãi bất ngờ",
+    Description: "Giảm giá lên đến 30%",
     icon: (
       <svg
         width="32"
@@ -103,8 +103,8 @@ export const brandingData = [
   },
   {
     id: 4,
-    title: "Affortable Prices",
-    Description: "Get Factory direct price",
+    title: "Giá cả phải chăng",
+    Description: "Là điểm đến tốt nhất cho người lao động",
     icon: (
       <svg
         width="32"
@@ -150,8 +150,8 @@ export const brandingData = [
   },
   {
     id: 5,
-    title: "Secure Payments",
-    Description: "100% protected payments",
+    title: "Thanh toán an toàn",
+    Description: "Bảo vệ 100% quyền lợi khách hàng",
     icon: (
       <svg
         width="32"
@@ -592,40 +592,40 @@ export const productData = [
 
 export const footerProductLinks = [
   {
-    name: "About us",
-    link: "/about",
+    name: "Thông tin doanh nghiệp",
+    link: "/",
   },
   {
-    name: "Careers",
-    link: "/carrers",
+    name: "Giày bảo hộ",
+    link: "/",
   },
   {
-    name: "Store Locations",
+    name: "Đồng phục bảo hộ",
   },
-  {
-    name: "Our Blog",
-  },
-  {
-    name: "Reviews",
-  },
+  // {
+  //   name: "Quản lý kho",
+  // },
+  // {
+  //   name: "Nhận xét",
+  // },
 ];
 
 export const footercompanyLinks = [
   {
-    name: "Game & Video",
+    name: "Thông tin cửa hàng",
   },
   {
-    name: "Phone &Tablets",
+    name: "Thông tin liên hệ",
   },
   {
-    name: "Computers & Laptop",
+    name: "Chi nhánh mới",
   },
-  {
-    name: "Sport Watches",
-  },
-  {
-    name: "Events",
-  },
+  // {
+  //   name: "Các sản phẩm liên quan",
+  // },
+  // {
+  //   name: "Sự kiện mới",
+  // },
 ];
 
 export const footerSupportLinks = [
@@ -633,15 +633,15 @@ export const footerSupportLinks = [
     name: "FAQ",
   },
   {
-    name: "Reviews",
+    name: "Nhận xét",
   },
   {
-    name: "Contact Us",
+    name: "Liên hệ với admin",
   },
-  {
-    name: "Shipping",
-  },
-  {
-    name: "Live chat",
-  },
+  // {
+  //   name: "Bảng phí ship",
+  // },
+  // {
+  //   name: "Các vấn đề khác",
+  // },
 ];

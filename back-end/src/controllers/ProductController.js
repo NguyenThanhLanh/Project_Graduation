@@ -39,7 +39,13 @@ class ProductController {
   UpdateProduct(req, res, next) {
     const idPrd = req.param("id");
     Product.findByIdAndUpdate(idPrd, req.body, { new: true })
-      .then((product) => res.json(product))
+      .then((product) =>
+        res.json({
+          success: true,
+          data: product,
+          message: "Thêm thành công",
+        })
+      )
       .catch((error) => next(new ErrorHandler(error.message, 500)));
   }
 

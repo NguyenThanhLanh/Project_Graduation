@@ -9,7 +9,6 @@ import logoPage from "../../../../assets/image-static/logoPage/logo.png";
 
 const DashboardHeader = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
   return (
     <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
       <div>

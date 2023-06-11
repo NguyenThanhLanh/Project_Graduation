@@ -42,7 +42,7 @@ const ProductDetail = ({ data }) => {
       toast.error("Vui lòng đăng nhập!");
     }
   };
-  console.log("Trang chi tiết sản phẩm: ", data);
+  // console.log("Trang chi tiết sản phẩm: ", data);
   return (
     <div className="bg-white">
       {data ? (

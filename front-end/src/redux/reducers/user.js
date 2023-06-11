@@ -20,6 +20,7 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
 
+  // Update
   updateUserInfoRequest: (state) => {
     state.loading = true;
   },
@@ -33,5 +34,21 @@ export const userReducer = createReducer(initialState, {
   updateUserInfoFailed: (state, action) => {
     state.loading = false;
     state.error = action.payload;
+  },
+
+  // Logout
+  LogOutUserRequest: (state, action) => {
+    state.loading = true;
+  },
+
+  LogOutUserSuccess: (state, action) => {
+    state.loading = false;
+    state.isAuthenticated = false;
+    state.logOutMessage = action.payload;
+  },
+
+  LogOutUserFail: (state, action) => {
+    state.isAuthenticated = true;
+    state.logOutMessage = action.payload;
   },
 });

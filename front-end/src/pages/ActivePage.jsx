@@ -6,7 +6,6 @@ import { server } from "../server";
 const ActivePage = () => {
   const [error, setError] = useState(false);
   const { active_Token } = useParams();
-  console.log(active_Token);
 
   useEffect(() => {
     if (active_Token) {
@@ -15,12 +14,9 @@ const ActivePage = () => {
           .post(`${server}/activation`, {
             active_Token,
           })
-          .then((res) => {
-            console.log(res);
-          })
+          .then((res) => {})
           .catch((err) => {
             setError(true);
-            console.log(err);
           });
       };
       sendRequest();

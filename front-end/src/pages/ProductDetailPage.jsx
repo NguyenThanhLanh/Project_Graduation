@@ -18,10 +18,8 @@ const ProductDetailPage = () => {
     const id = path.substring(path.lastIndexOf("/") + 1);
     const data = allProductData.find((i) => i._id === id);
     setData(data);
-    // console.log("id---------------------------", id);
   }, [location]);
 
-  // console.log("dữ liệu: ", data);
   return (
     <div>
       <Header activeHeading={3} />

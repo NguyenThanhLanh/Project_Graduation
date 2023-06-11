@@ -44,7 +44,7 @@ const Footer = () => {
             style={{ filter: "brightness(0) invert(1)" }}
           />
           <br />
-          <p>The home and elements needeed to create beatiful products.</p>
+          <p>All For Faith Love, Desire To Protect Workers.</p>
           <div className="flex items-center mt-[15px]">
             <AiFillFacebook size={25} className="cursor-pointer" />
             <AiOutlineTwitter
@@ -63,7 +63,7 @@ const Footer = () => {
         </ul>
 
         <ul className="text-center sm:text-start ml-8 ">
-          <h1 className="mb-1 font-semibold">Company</h1>
+          <h1 className="mb-1 font-semibold">Công ty</h1>
           {footerProductLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -78,7 +78,7 @@ const Footer = () => {
         </ul>
 
         <ul className="text-center sm:text-start ml-8">
-          <h1 className="mb-1 font-semibold">Shop</h1>
+          <h1 className="mb-1 font-semibold">Chi nhánh</h1>
           {footercompanyLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -93,7 +93,7 @@ const Footer = () => {
         </ul>
 
         <ul className="text-center sm:text-start ml-8">
-          <h1 className="mb-1 font-semibold">Support</h1>
+          <h1 className="mb-1 font-semibold">Hỗ trợ</h1>
           {footerSupportLinks.map((link, index) => (
             <li key={index}>
               <Link

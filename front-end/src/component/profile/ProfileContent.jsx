@@ -167,7 +167,7 @@ const AllOrders = () => {
     dispatch(loadAllOrderUser(user._id));
   }, []);
   const orders = orderData ? [...orderData] : [];
-  console.log("Tất cả order: ", orders);
+  // console.log("Tất cả order: ", orders);
   const columns = [
     {
       field: "no",

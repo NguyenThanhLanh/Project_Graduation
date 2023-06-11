@@ -26,6 +26,7 @@ import {
   AdminCreateEventPage,
   AdminGetAllSupplierPage,
   AdminCreateSupplierPage,
+  UpdateProductPage,
 } from "./AdminRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,8 +47,6 @@ const App = () => {
   const isAuthenticated = localStorage.getItem("user") ? true : false;
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log("Giá trị khởi tạo:----------------------", isAuthenticated, user);
-
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadProduct());
@@ -61,7 +60,6 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/activation/:active_Token" element={<ActivePage />} />
@@ -82,20 +80,6 @@ const App = () => {
               }
             />
 
-            {/* Admin */}
-            {/* <Route path="/admin/dashboard" element={<AdminDashboardPage />} /> */}
-            {/* <Route
-              path="/admin/create-product"
-              element={<CreateProductPage />}
-            />
-            <Route path="/admin/products" element={<AdminGetProductPage />} />
-            <Route path="/admin/orders" element={<AdminGetOrderPage />} />
-            <Route path="/admin/events" element={<AdminGetEventPage />} />
-            <Route
-              path="/admin/create-event"
-              element={<AdminCreateEventPage />}
-            /> */}
-
             <Route
               path="/admin/dashboard"
               element={
@@ -107,6 +91,18 @@ const App = () => {
                 </ProjectAdminRoute>
               }
             />
+            <Route
+              path="/product/update/:id"
+              element={
+                <ProjectAdminRoute
+                  isAuthenticated={isAuthenticated}
+                  user={user}
+                >
+                  <UpdateProductPage />
+                </ProjectAdminRoute>
+              }
+            />
+
             <Route
               path="/admin/create-product"
               element={
@@ -184,6 +180,7 @@ const App = () => {
                 </ProjectAdminRoute>
               }
             />
+            <Route path="/" element={<HomePage />} />
           </Routes>
           <ToastContainer
             position="top-right"

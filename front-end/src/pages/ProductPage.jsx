@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Header from "../component/layout/Header";
 import Footer from "../component/layout/Footer";
 import styles from "../styles/styles";
@@ -11,9 +11,22 @@ const ProductPage = () => {
   const [searchParams] = useSearchParams();
   const { productData } = useSelector((state) => state.productData);
   const categoryData = searchParams.get("category");
-  console.log("danh muc:", categoryData);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleURLChange = () => {
+      const searchParams = new URLSearchParams(location.search);
+      const category = searchParams.get("category");
+    };
+
+    window.addEventListener("popstate", handleURLChange);
+    return () => {
+      window.removeEventListener("popstate", handleURLChange);
+    };
+  }, [location.search]);
+
   useEffect(() => {
     const allProductData = productData ? [...productData] : [];
     if (categoryData === null) {
@@ -45,7 +58,6 @@ const ProductPage = () => {
     }
     window.scrollTo(0, 0);
   }, []);
-  console.log("dataaa: ", productData);
   return (
     <>
       <Header activeHeading={3} />

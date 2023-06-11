@@ -41,7 +41,7 @@ const ProductCard = ({ data }) => {
     }
   };
 
-  console.log("Tên của sản phẩm được hconj: ", open);
+  // console.log("Tên của sản phẩm được hconj: ", open);
 
   return (
     <>

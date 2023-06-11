@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { DataGrid } from "@material-ui/data-grid";
 import Loader from "../../layout/Loader";
+import { RiEdit2Fill } from "react-icons/ri";
 
 const AllProduct = () => {
   const { productData, isLoading } = useSelector((state) => state.productData);
@@ -60,7 +61,7 @@ const AllProduct = () => {
     },
     {
       field: "",
-      width: 150,
+      width: 200,
       headerName: "Chức năng",
       headerAlign: "center",
       type: "number",
@@ -77,7 +78,13 @@ const AllProduct = () => {
                   </Button>
                 </Link>
               </span>
-
+              <span>
+                <Link to={`/product/update/${params.id}`}>
+                  <Button>
+                    <RiEdit2Fill size={20} />
+                  </Button>
+                </Link>
+              </span>
               <span>
                 <Button onClick={() => handleDelete(params.id)}>
                   <AiOutlineDelete size={20} />

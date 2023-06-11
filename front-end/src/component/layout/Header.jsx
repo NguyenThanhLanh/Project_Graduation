@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -13,13 +13,25 @@ import { RiPhoneFill } from "react-icons/ri";
 import logoPage from "../../assets/image-static/logoPage/logo.png";
 
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
+import { userReducer } from "../../redux/reducers/user";
+import { MdKeyboardVoice } from "react-icons/md";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const Header = ({ activeHeading }) => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const { productData } = useSelector((state) => state.productData);
   const { categoriesData } = useSelector((state) => state.categoriesData);
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [showResults, setShowResults] = useState(false);
@@ -29,6 +41,23 @@ const Header = ({ activeHeading }) => {
   const [openWishList, setOpenWishList] = useState(false);
   const { cart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userReducer);
+  }, []);
+
+  useEffect(() => {
+    setSearchTerm(transcript);
+  }, [transcript]);
+
+  const handleSearchVoice = () => {
+    resetTranscript();
+    SpeechRecognition.startListening();
+    const delay = 3000;
+    setTimeout(() => {
+      SpeechRecognition.stopListening();
+    }, delay);
+  };
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -78,9 +107,10 @@ const Header = ({ activeHeading }) => {
               onChange={(e) => handleSearchChange(e)}
               className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
             />
-            <AiOutlineSearch
+            <MdKeyboardVoice
               size={30}
               className="absolute right-2 top-1.5 cursor-pointer"
+              onClick={handleSearchVoice}
             />
             {searchData && searchData.length !== 0 ? (
               <div

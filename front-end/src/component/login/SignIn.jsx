@@ -5,12 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server.js";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { userReducer } from "../../redux/reducers/user.js";
+import { loadUser } from "../../redux/actions/user.js";
 
 const Login = () => {
   const navigate = useNavigate();
   const [nameUser, setNameUser] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +30,8 @@ const Login = () => {
       )
       .then((res) => {
         toast.success("Login Success!");
+        dispatch(loadUser());
         navigate("/");
-        window.location.reload();
       })
       .catch((err) => toast.error(err.response.data.message));
   };
@@ -129,11 +133,18 @@ const Login = () => {
                 Đăng nhập
               </button>
             </div>
-            <div className={`${styles.normalFlex}`}>
-              <h4>Bạn chưa có tài khoản?</h4>
-              <Link to="/sign-up" className="text-blue-600 pl-2">
-                Đăng ký
-              </Link>
+            <div className="flex justify-around">
+              <div className={`${styles.normalFlex}`}>
+                <h4>Bạn chưa có tài khoản?</h4>
+                <Link to="/sign-up" className="text-blue-600 pl-2">
+                  Đăng ký
+                </Link>
+              </div>
+              <div>
+                <Link to="/" className="text-blue-600 pl-2">
+                  Quay lại trang chủ
+                </Link>
+              </div>
             </div>
           </form>
         </div>

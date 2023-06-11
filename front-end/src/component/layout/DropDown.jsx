@@ -8,7 +8,6 @@ const DropDown = ({ categoriesData, setDropDown }) => {
   const submitHandle = (i) => {
     navigate(`/products?category=${i.name}`);
     setDropDown(false);
-    window.location.reload();
   };
   console.log("Cái cần tìm: ", categoriesData);
   return (
