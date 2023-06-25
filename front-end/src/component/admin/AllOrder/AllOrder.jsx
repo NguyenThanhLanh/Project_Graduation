@@ -10,12 +10,18 @@ import {
   loadAllOrderAdmin,
 } from "../../../redux/actions/order";
 import styles from "../../../styles/styles";
+import { statusOptions } from "./Options";
+import { StatusCell } from "./Options";
 
 const AllOrder = () => {
   const { orderAdminData, isLoading } = useSelector((state) => state.orderData);
   const dispatch = useDispatch();
   const allOrder = orderAdminData ? [...orderAdminData] : [];
+  const [selectedStatus, setSelectedStatus] = useState("");
 
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
   const exportToExcel = (allOrder) => {
     const data = [
       [
@@ -82,11 +88,12 @@ const AllOrder = () => {
       field: "status",
       headerName: "Trạng thái đơn",
       minWidth: 150,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Đang xử lý"
-          ? "greenColor"
-          : "redColor";
-      },
+      renderCell: (params) => (
+        <StatusCell
+          value={params.getValue(params.id, "status")}
+          id={params.getValue(params.id, "id")}
+        />
+      ),
       align: "center",
       sortable: false,
       disableColumnMenu: true,
@@ -163,9 +170,9 @@ const AllOrder = () => {
         <Loader />
       ) : (
         <div className="w-full">
-          <div className="w-full mx-8 pt-1 mt-10">
+          <div className="w-full mx-8 pt-1 mt-5">
             <div
-              className={`${styles.button} mt-5`}
+              className={`${styles.button} mt-2`}
               onClick={() => exportToExcel(allOrder)}
             >
               <span className="text-[#fff] font-[Poppins] text-[18px]">
@@ -173,7 +180,7 @@ const AllOrder = () => {
               </span>
             </div>
           </div>
-          <div className="w-full mx-8 pt-1 mt-10 bg-white">
+          <div className="w-full mx-8 pt-1 mt-4 bg-white">
             <DataGrid
               rows={row.map((row, index) => ({ ...row, no: index }))}
               columns={columns}

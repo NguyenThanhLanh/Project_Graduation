@@ -49,11 +49,9 @@ const UpdateProduct = ({ product }) => {
         category: category,
         suppiler: suppiler,
       };
-      await axios.put(
-        `${server}/product/6485903ff077b6863fdbaba8`,
-        dataUpdate,
-        { withCredentials: true }
-      );
+      await axios.put(`${server}/product/${id}`, dataUpdate, {
+        withCredentials: true,
+      });
       dispatch(loadProduct());
       toast.success("Cập nhập sản phẩm thành công!");
     } catch (error) {

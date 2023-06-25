@@ -31,6 +31,28 @@ class OrderController {
       .catch((error) => next(new ErrorHandler(error.message, 500)));
   }
 
+  async UpdateOrder(req, res, next) {
+    try {
+      const idPrd = req.param("id");
+      const data = req.body;
+      Order.updateOne(
+        { _id: idPrd },
+        { $set: { "paymentInfo.status": data.status } }
+      )
+        .then((result) =>
+          res.status(201).json({
+            status: "success",
+            data: result,
+          })
+        )
+        .catch((error) =>
+          next(new ErrorHandler("Đã xảy ra lỗi khi cập nhật", 500))
+        );
+    } catch (error) {
+      next(new ErrorHandler(error.message, 500));
+    }
+  }
+
   DeleteOrder(req, res) {
     const idOrder = req.param("id");
     Order.findByIdAndRemove(idOrder)

@@ -7,6 +7,8 @@ import AdminCreateEventPage from "./pages/admin/AdminCreateEventPage.jsx";
 import AdminCreateSupplierPage from "./pages/admin/AdminCreateSupplierPage.jsx";
 import AdminGetAllSupplierPage from "./pages/admin/AdminGetAllSupplierPage.jsx";
 import UpdateProductPage from "./pages/admin/UpdateProductPage.jsx";
+import UpdateEventPage from "./pages/admin/UpdateEventPage.jsx";
+import UpdateSupplierPage from "./pages/admin/UpdateSupplierPage.jsx";
 
 export {
   AdminDashboardPage,
@@ -18,4 +20,6 @@ export {
   AdminCreateEventPage,
   AdminGetAllSupplierPage,
   AdminCreateSupplierPage,
+  UpdateEventPage,
+  UpdateSupplierPage,
 };

@@ -30,9 +30,6 @@ const EventCard = ({ active, data }) => {
               {data.discount_price}$
             </h5>
           </div>
-          <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
-            120 sold
-          </span>
         </div>
 
         {/* count down */}

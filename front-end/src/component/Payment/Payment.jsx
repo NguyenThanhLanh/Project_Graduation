@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
@@ -28,6 +28,20 @@ const Payment = () => {
       type: "Thanh toán khi nhận hàng",
       status: "Đang xử lý",
     };
+
+    const list = orderData.cart;
+    list.forEach(async (item) => {
+      const quantityUpdate = item.quantity - item.qty;
+      const newItem = {
+        ...item,
+        quantity: quantityUpdate,
+      };
+      await axios
+        .put(`${server}/product/${item._id}`, newItem, config)
+        .then((res) => {
+          console.log("update product", res);
+        });
+    });
 
     await axios
       .post(`${server}/order/create-order`, orderData, config)

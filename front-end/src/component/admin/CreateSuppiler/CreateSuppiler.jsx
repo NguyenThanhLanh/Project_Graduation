@@ -33,11 +33,12 @@ const CreateSuppiler = () => {
 
     if (success) {
       dispatch(loadSuppiler());
-      toast.success("Created new supplier ");
+      toast.success("Thêm mới nhà cung cấp thành công");
       setName("");
       setAddress("");
       setPhone("");
       setEmail("");
+      dispatch(loadSuppiler());
       // navigate("/admin/supplier");
       // navigate("/admin/supplier");
     }

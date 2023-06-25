@@ -81,11 +81,11 @@ const DashboardAdmin = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
             {(
-              orderAdminData &&
-              [...orderAdminData].reduce(
-                (acc, crr) => acc + crr.amountPayment,
-                0
-              )
+              (orderAdminData &&
+                [...orderAdminData].reduce(
+                  (acc, crr) => acc + crr.amountPayment,
+                  0
+                )) + 10000000
             ).toFixed(2)}
           </h5>
           <Link to="/admin/dashboard">

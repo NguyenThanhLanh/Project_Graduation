@@ -27,6 +27,8 @@ import {
   AdminGetAllSupplierPage,
   AdminCreateSupplierPage,
   UpdateProductPage,
+  UpdateEventPage,
+  UpdateSupplierPage,
 } from "./AdminRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -92,13 +94,37 @@ const App = () => {
               }
             />
             <Route
-              path="/product/update/:id"
+              path="/admin/product/update/:id"
               element={
                 <ProjectAdminRoute
                   isAuthenticated={isAuthenticated}
                   user={user}
                 >
                   <UpdateProductPage />
+                </ProjectAdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/event/update/:id"
+              element={
+                <ProjectAdminRoute
+                  isAuthenticated={isAuthenticated}
+                  user={user}
+                >
+                  <UpdateEventPage />
+                </ProjectAdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/supplier/update/:id"
+              element={
+                <ProjectAdminRoute
+                  isAuthenticated={isAuthenticated}
+                  user={user}
+                >
+                  <UpdateSupplierPage />
                 </ProjectAdminRoute>
               }
             />

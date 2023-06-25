@@ -11,6 +11,7 @@ const category = require("./categoriesRouter");
 const order = require("./orderRoute");
 const activationAccount = require("./activationRouter");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
+const recommendations = require("./RecommendProduct");
 
 function router(app) {
   app.get("/logout", catchAsyncErrors(logout));
@@ -27,6 +28,7 @@ function router(app) {
   app.use("/activation", activationAccount);
   app.use("/category", category);
   app.use("/order", order);
+  app.use("/recommend-product", recommendations);
 
   app.use("/", (req, res) => {
     res.send("Trang chủ");

@@ -38,9 +38,11 @@ class EventController {
 
   UpdateEvent(req, res, next) {
     const idPrd = req.param("id");
-    Product.findByIdAndUpdate(idPrd, req.body, { new: true })
+    debugger;
+    Event.findByIdAndUpdate(idPrd, req.body, { new: true })
       .then((product) => res.json(product))
       .catch((error) => next(new ErrorHandler(error.message, 500)));
+    debugger;
   }
 
   DeleteEvent = async (req, res, next) => {
